@@ -1,6 +1,9 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
+//Import the components that we will need
+import Message from "Components/Message";//Box for a single message
+
 function ChatForm() {
 
   const {iduser} = useParams()
@@ -23,20 +26,25 @@ function ChatForm() {
   return (
     <div className='chat'>
 
-      <div className="chat-history">
+      <div className="chat__history">
         {chatHistory.map((message, index) => (
-          <div key={index}>{message}</div>
+          <Message key={index} text={message}></Message>
         ))}
       </div>
       
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} className='chat__submit'> 
         <input
+          className='chat__submitInput'
           type="text"
           value={inputText}
           onChange={handleInputChange}
           placeholder="Escribe un mensaje..."
         />
-        <button type="submit">Enviar</button>
+
+        <button className='chat__sendButton' type="submit"> 
+          <i class="fa-solid fa-paper-plane"></i> 
+        </button>
+
       </form>
 
     </div>
