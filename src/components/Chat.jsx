@@ -6,7 +6,8 @@ import Message from "Components/Message";//Box for a single message
 
 function ChatForm() {
 
-  const {iduser} = useParams()
+  //Get the id of the user you want to show the chat from the url
+  const {iduserParam} = useParams()
 
   const [inputText, setInputText] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
@@ -42,7 +43,7 @@ function ChatForm() {
         />
 
         <button className='chat__sendButton' type="submit"> 
-          <i class="fa-solid fa-paper-plane"></i> 
+          <i className="fa-solid fa-paper-plane"></i> 
         </button>
 
       </form>
