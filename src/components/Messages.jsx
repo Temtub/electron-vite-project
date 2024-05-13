@@ -6,7 +6,7 @@ import { useState } from 'react';
 import { useGetUserById } from '../services/hooks/useGetUserById';
 
 import ChargingChats from './ChargingChats';
-import Chats from './Chats';
+import Friends from './Friends';
 
 function Messages() {
   //Get the id param
@@ -15,13 +15,11 @@ function Messages() {
   // Get the data from the by BD by the hook
   const userData = useGetUserById(userId)
 
-  console.log(userData)
-  
   return (
     <div className='messages'>
       
       {/* If the data of the chats of the user is filled then show it else show that is charging */}
-      {/* { userData ? <Chats data={"asd"}></Chats> : <ChargingChats/> } */}
+      { userData ? <Friends data={userData.friends}></Friends> : <ChargingChats/> }
       
       <Outlet></Outlet>
     </div>
