@@ -11,6 +11,8 @@ import './index.css'
 import Messages from 'Components/Messages';
 import Chat from "Components/Chat"
 import DefaultChatBox from 'Components/DefaultChatBox';
+import Login from 'Components/Login/Login';
+import Register from 'Components/Register/Form';
 
 ReactDOM.createRoot(document.getElementById('root') ).render(
   <React.StrictMode>
@@ -20,14 +22,19 @@ ReactDOM.createRoot(document.getElementById('root') ).render(
       {/* Routes of the page */}
       <Routes>
 
-        {/* Main route of the page that will contain all the users*/}
-        <Route path="/" element={ <Messages></Messages> }>   
+        {/* Login */}
+        <Route index path='/' element= { <Login/> }></Route>  
+        {/* Register */}
+        <Route path='/register' element= { <Register></Register>}></Route>
 
+        {/* Main route of the page that will contain all the users*/}
+        <Route path="/chat" element={ <Messages></Messages> }>   
+        
           {/* The message that will show if theres no chat selected */}
-          <Route index path='/' element= { <DefaultChatBox></DefaultChatBox> }></Route>       
+          <Route index path='/chat' element= { <DefaultChatBox></DefaultChatBox> }></Route>       
           
           {/* Here will go the chats of the specific user */}
-          <Route path='/:idUserParam' element= { <Chat></Chat> }></Route>       
+          <Route path='/chat/:idUserParam' element= { <Chat></Chat> }></Route>       
           
         </Route>
 
