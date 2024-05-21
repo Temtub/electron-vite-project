@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 //Import the components that we will need
 import Message from "Components/Message";//Box for a single message
 
+
+
 function ChatForm() {
 
   //Get the id of the user you want to show the chat from the url

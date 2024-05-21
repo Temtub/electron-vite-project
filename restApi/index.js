@@ -6,7 +6,7 @@
  * @param {*} headers 
  * @returns 
  */
-export const restful = (method, endpoint, data, headers = {}) => {
+export const restful = async (method, endpoint, data, headers = {}) => {
     const options = {
         method,
         headers: {
@@ -23,7 +23,7 @@ export const restful = (method, endpoint, data, headers = {}) => {
             return response.json();
         })
         .catch(error => {
-            // console.log('Error:', error);
+            console.log('Error:', error);
             throw error; // Re-lanzar el error para que el llamador pueda manejarlo
         });
 };

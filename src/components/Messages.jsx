@@ -1,25 +1,51 @@
 import { Outlet } from 'react-router';
-import { useParams } from 'react-router-dom';
-import { useState } from 'react';
 
-//Import the hook to get the user data 
-import { useGetUserById } from '../services/hooks/useGetUserById';
+import { useCheckSession } from '../services/hooks/useCheckSession';
+import { getNewChat } from '../services/getNewChat';
 
 import ChargingChats from './ChargingChats';
-import Friends from './Friends';
+import Friends from './Chats';
+import { restful } from "/restApi"
+import { useEffect, useState } from 'react';
+let token;
 
-function Messages() {
-  //Get the id param
-  let userId = useParams().idUserParam
+function Messages () {
+ 
+  const token = useCheckSession();
+  const [userData, setUserData] = useState(null);
 
-  // Get the data from the by BD by the hook
-  const userData = useGetUserById(userId)
+  useEffect(() => {
+    const chargeMessages = async () => {
+      if (token) {
+        try {
+          let response = await restful("GET", `http://localhost:3001/api/user/${token.data.id}`);
+          setUserData(response);
+        } catch (error) {
+          console.error('Failed to fetch messages:', error);
+        }
+      }
+    };
+
+    chargeMessages();
+  }, [token]);
+
+  const searchNewChat = async () => {
+    // let newChat = useGetNewChat(user)
+    // console.log(userData)
+    let newChat
+    ( userData ?  newChat = await getNewChat(userData._id) : false)
+    console.log(newChat)
+  }
+
   
+
   return (
     <div className='messages'>
-      
-      {/* If the data of the chats of the user is filled then show it else show that is charging */}
-      { userData ? <Friends data={userData.friends}></Friends> : <ChargingChats/> }
+      <aside>
+        <button onClick={searchNewChat}>Buscar persona</button>
+      {/* If the data of the chats of the user is filled then show it else show that it is charging */}
+      { userData ? <Friends data={userData.chats}></Friends> : <ChargingChats/> }
+      </aside>
       
       <Outlet></Outlet>
     </div>
