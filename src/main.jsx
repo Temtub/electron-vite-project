@@ -5,7 +5,8 @@ import ReactDOM from 'react-dom/client'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 //Import the css
-import './index.css'
+import './styles/login.css'
+import './styles/index.css'
 
 //Import the components (as you can see the route is from Components thanks to the configuration we made in tsconfig.json)
 import Messages from 'Components/Messages';

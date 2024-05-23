@@ -1,0 +1,47 @@
+
+.loginCard{
+    background-color: #242424;
+    border-radius: 20px;
+    margin-top: 10px;
+    padding: 50px !important;
+    /* padding-left: 100px !important; */
+}
+
+/* ----------- FORM STYLES --------- */
+.formGroup {
+    margin-bottom: 15px !important;
+    margin-top: 15px !important;
+    
+    width: 100%;
+}
+
+.formLabel {
+    background-color: #242424;
+    margin-left: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.formInput {
+    margin-top: -20px;
+    background-color: #242424 !important;
+    color: white !important;
+
+    height: 52px;
+}
+
+.buttonGroup{
+    
+    width: 100%;
+}
+.btn{
+    border: 1px solid white !important;
+    color: white !important;
+    background-color: #24242400 !important;
+}
+.btnLogin{
+    background-color: #1380dada !important;
+}
+.btnLogin:hover{
+    background-color: #1a8eecda !important;
+}
