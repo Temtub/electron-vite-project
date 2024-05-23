@@ -1,21 +1,21 @@
 import { restful } from "/restApi/index.js";
 import personaImage from "../assets/images/persona.jpg";
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
-async function FriendBox ({ id }) {
-    // Supongamos que aquí tienes lógica para obtener información del amigo basada en su ID.
+function ChatBox ({ id }) {
 
     return (
-        <>
+        <Link to={"/chat/"+id}>
             <div id={id}>
-                <img src={personaImage} alt="Friend" />
                 <div>
                     {/* Aquí puedes agregar contenido para mostrar información del amigo */}
                     <h3>Nombre del Amigo</h3>
                     <p>Información adicional sobre el amigo...</p>
                 </div>
             </div>
-        </>
+        </Link>
     );
 }
 
-export default FriendBox;
+export default ChatBox;

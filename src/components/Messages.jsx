@@ -13,7 +13,7 @@ function Messages () {
  
   const token = useCheckSession();
   const [userData, setUserData] = useState(null);
-
+  const [newChat, setNewChat] = useState("")
   useEffect(() => {
     const chargeMessages = async () => {
       if (token) {
@@ -34,6 +34,7 @@ function Messages () {
     // console.log(userData)
     let newChat
     ( userData ?  newChat = await getNewChat(userData._id) : false)
+    setNewChat(newChat)
     console.log(newChat)
   }
 

@@ -1,26 +1,40 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 
 //Import the components that we will need
 import Message from "Components/Message";//Box for a single message
 
-
-
-function ChatForm() {
+function Chat() {
 
   //Get the id of the user you want to show the chat from the url
-  const {iduserParam} = useParams()
+  const {idUserParam} = useParams()
 
   const [inputText, setInputText] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
 
+  // Re Render the chats when you change between them
+  useEffect(() => {
+    setChatHistory([]);
+  }, [idUserParam]);
+
+  /**
+   * Function that gets the message
+   * @param {*} event 
+   */
   const handleInputChange = (event) => {
     setInputText(event.target.value);
   };
 
+
+  /**
+   * Function that manages the messages
+   * @param {*} event 
+   */
   const handleSubmit = (event) => {
     event.preventDefault();
+
     if (inputText.trim() !== '') {
+      console.log(inputText)
       setChatHistory([...chatHistory, inputText]);
       setInputText('');
     }
@@ -54,4 +68,4 @@ function ChatForm() {
   );
 }
 
-export default ChatForm;
+export default Chat;
