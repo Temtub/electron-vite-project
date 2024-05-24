@@ -1,42 +1,49 @@
 import { useEffect, useState } from 'react';
 import { restful } from '/restApi/index.js';
-
 import ChatBox from './ChatBox';
-import { resolveConfig } from 'vite';
 
 function Chats({ data }) {
     const [chatsData, setChatsData] = useState([]);
+    const [error, setError] = useState("");
 
+    // Fetch the data from the bd
     useEffect(() => {
+        /**
+         * Function to fetch the data
+         */
         const fetchData = async () => {
             if (data && data.length > 0) {
                 try {
                     const response = await restful('POST', 'http://localhost:3001/api/chat/chats', { chats: data });
-                    console.log(response)
-                    setChatsData(response);
                     
-                } catch (error) {
-                    console.error('Error fetching chats data:', error);
+                    if (response.hasOwnProperty('status') && response.status === false) {
+                        setError(response.msg);
+                    } else {
+                        setChatsData(response);
+                    }
+                } catch (err) {
+                    console.error('Error fetching chats data:', err);
+                    setError('Error fetching chats data.');
                 }
             }
         };
 
         fetchData();
-    }, []);
-
-    const renderChat = (chat) => {
-        if (chatsData.length === 0) {
-            return <div>Empty</div>;
-        }
-        return <ChatBox key={chat._id} id={chat._id} />
-    };
+    }, [data]);
     
+    console.log(chatsData)
     return (
         <aside className="chats">
-
-        {chatsData && chatsData.map(chat => (
-            renderChat(chat)
-        ))}
+            {/* If theres no data it shows it, if theres no also and if alls correct dont show it */}
+            {error ? (
+                <div className="error">{error}</div>
+            ) : (
+                chatsData.length === 0 ? (
+                    <div>Empty</div>
+                ) : (
+                    chatsData.map(chat => <ChatBox key={chat._id} name={chat.name} id={chat._id} />)
+                )
+            )}
         </aside>
     );
 }

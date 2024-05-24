@@ -1,11 +1,18 @@
 import { useState } from "react";
+import { Link } from 'react-router-dom';
+
 import { restful } from "/restApi/index"
+
+import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import { ShowMessage } from "Components/specialMessages/ShowMessage";
 
 function Register() {
     const [nombre, setNombre] = useState('');
     const [email, setEmail] = useState('');
-    const [password, setpassword] = useState('');
-    const [confirmPassword, setconfirmPassword] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
 
     const [emptyValue, setEmptyValue ] = useState(false)
     const [diffPassword, setDiffPassword ] = useState(false)
@@ -29,54 +36,80 @@ function Register() {
         }
 
       };
-    return (
+      return (
+        <Container className="loginCard d-flex">
+            <Row className="w-50 justify-content-md-center align-items-start">
+                <h1>Regístrate</h1>
+            </Row>
+            
+            <Row className="w-50 justify-content-md-center">
+                <Col xs={12} md={10}>
+                    <Form onSubmit={handleSubmit}>
+                        <Form.Group className="formGroup" controlId="formBasicName">
+                            <Form.Label className="formLabel">Nombre:</Form.Label>
+                            <Form.Control
+                                className="formInput"
+                                type="text"
+                                placeholder="Enter your name"
+                                value={nombre}
+                                onChange={(e) => setNombre(e.target.value)}
+                            />
+                        </Form.Group>
 
-        <main>
+                        <Form.Group className="formGroup" controlId="formBasicEmail">
+                            <Form.Label className="formLabel">Email:</Form.Label>
+                            <Form.Control
+                                className="formInput"
+                                type="email"
+                                placeholder="Enter your email"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+                        </Form.Group>
 
-            <h1>Registrate</h1>
+                        <Row>
+                            <Col xs={6}>
+                                <Form.Group className="formGroup" controlId="formBasicPassword">
+                                    <Form.Label className="formLabel">Contraseña:</Form.Label>
+                                    <Form.Control
+                                        className="formInput"
+                                        type="password"
+                                        placeholder="Enter your password"
+                                        value={password}
+                                        onChange={(e) => setPassword(e.target.value)}
+                                    />
+                                </Form.Group>
+                            </Col>
 
-            {mensaje && <p>{mensaje}</p>}
+                            <Col xs={6}>
+                                <Form.Group className="formGroup" controlId="formBasicConfirmPassword">
+                                    <Form.Label className="formLabel">Repite la contraseña:</Form.Label>
+                                    <Form.Control
+                                        className="formInput"
+                                        type="password"
+                                        placeholder="Confirm your password"
+                                        value={confirmPassword}
+                                        onChange={(e) => setConfirmPassword(e.target.value)}
+                                    />
+                                </Form.Group>
+                            </Col>
+                        </Row>
+                        {mensaje && <ShowMessage msg={mensaje}></ShowMessage>}
 
-            <form onSubmit={handleSubmit}>
-                <label htmlFor="nombre">Nombre:</label>
-                <input
-                    type="text"
-                    id="nombre"
-                    value={nombre}
-                    onChange={(e) => setNombre(e.target.value)}
-                />
-
-                <label htmlFor="email">Email:</label>
-                <input
-                    type="text"
-                    id="email"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    
-                />
-
-                <label htmlFor="password">password:</label>
-                <input
-                    type="password"
-                    id="password"
-                    value={password}
-                    onChange={(e) => setpassword(e.target.value)}
-                    
-                />
-                <label htmlFor="password">Repite la password:</label>
-                <input
-                    type="password"
-                    id="confirmPassword"
-                    value={confirmPassword}
-                    onChange={(e) => setconfirmPassword(e.target.value)}
-                    
-                />
-
-                <button type="submit">Registrarse</button>
-            </form>
-        </main>
-    )
-}
+                        <div className="buttonGroup d-flex flex-row justify-content-between">
+                            <Link to="/" className="btn ">
+                                Iniciar sesión
+                            </Link>
+                            <Button variant="primary" type="submit" className="btn btnLogin" id="send">
+                                Registrarse
+                            </Button>
+                        </div>
+                    </Form>
+                </Col>
+            </Row>
+        </Container>
+    );
+};
 
 
 export default Register

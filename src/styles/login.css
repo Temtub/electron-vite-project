@@ -1,17 +1,17 @@
-
-.loginCard{
+.loginCard {
     background-color: #242424;
     border-radius: 20px;
     margin-top: 10px;
     padding: 50px !important;
     /* padding-left: 100px !important; */
+    position: relative;
 }
 
 /* ----------- FORM STYLES --------- */
 .formGroup {
     margin-bottom: 15px !important;
     margin-top: 15px !important;
-    
+
     width: 100%;
 }
 
@@ -30,18 +30,81 @@
     height: 52px;
 }
 
-.buttonGroup{
-    
+.buttonGroup {
+
     width: 100%;
 }
-.btn{
+
+.btn {
     border: 1px solid white !important;
     color: white !important;
     background-color: #24242400 !important;
 }
-.btnLogin{
+
+.btnLogin {
     background-color: #1380dada !important;
 }
-.btnLogin:hover{
+
+.btnLogin:hover {
     background-color: #1a8eecda !important;
+}
+
+
+
+.containerRabbit {
+    position: absolute;
+    width: 130px;
+    /* Ajusta el tamaño del contenedor según tus necesidades */
+    height: 100px;
+    bottom: -10px;
+
+    /* border: 1px solid black; */
+}
+
+.bottom-image {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-43%);
+    width: 100%;
+    /* Ajusta el tamaño de la imagen según tus necesidades */
+    height: auto;
+    /* Mantén la proporción de la imagen */
+}
+
+.speech-bubble {
+    position: absolute;
+    bottom: 120%;
+    /* Ajusta esta posición según tus necesidades */
+    left: 100%;
+    transform: translateX(-50%);
+    width: 180px;
+    /* Ajusta el tamaño del bocadillo según tus necesidades */
+    padding: 10px;
+    background: #81818100;
+    border: 1px solid #ffffff;
+    border-radius: 25px;
+    /* box-shadow: 2px 2px 5px #aaaaaa; */
+    color: #ffffff;
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom:     0px;
+    /* Ajusta la posición de la punta del bocadillo según sea necesario */
+    left: 30%;
+    transform: translateX(-100%);
+    width: 0;
+    height: 0;
+    border: 10px solid transparent;
+    border-top-color: #ffffff;
+    border-bottom: 0;
+    margin-left: -10px;
+    margin-bottom: -10px;
+}
+
+.speech-bubble p {
+    margin: 0;
+    text-align: center;
 }

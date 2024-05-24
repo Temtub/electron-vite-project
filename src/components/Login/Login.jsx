@@ -6,8 +6,8 @@ import { restful } from "/restApi/index"
 
 // COmponents
 import { ShowMessage } from "Components/specialMessages/ShowMessage";
-
 function Login() {
+    let response;
     const navigate = useNavigate();
     const [user, setUser] = useState("")
     const [pass, setPass] = useState("")
@@ -15,7 +15,7 @@ function Login() {
     const [correctLogin, setCorrectLogin] = useState(false)
 
     const [error, setError] = useState("")
-    let response;
+
     const formManagement = async (e) => {
         e.preventDefault()
 
@@ -27,7 +27,7 @@ function Login() {
             user: user,
             pass: pass
         }
-        // Check thath the user exists
+        // Check that the user exists
         try {
             response = await restful("POST", "http://localhost:3001/api/login", data)
             console.log(response)
@@ -101,7 +101,16 @@ function Login() {
                         
                     </Form>
                 </Col>
-            </Row>  
+            </Row>
+            
+            <div className="containerRabbit">
+                <img className="bottom-image" src="../src/assets/images/conejo.png" alt="" />
+
+                <div className="speech-bubble">
+                    <p>¡Bienvenido de nuevo!</p>
+                </div>
+            </div>
+
         </Container>
 
     );

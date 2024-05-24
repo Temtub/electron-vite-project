@@ -13,7 +13,8 @@ function Messages () {
  
   const token = useCheckSession();
   const [userData, setUserData] = useState(null);
-  const [newChat, setNewChat] = useState("")
+  const [newChat, setNewChat] = useState([])
+
   useEffect(() => {
     const chargeMessages = async () => {
       if (token) {
@@ -32,9 +33,9 @@ function Messages () {
   const searchNewChat = async () => {
     // let newChat = useGetNewChat(user)
     // console.log(userData)
-    let newChat
-    ( userData ?  newChat = await getNewChat(userData._id) : false)
-    setNewChat(newChat)
+    let response
+    ( userData ?  response = await getNewChat(userData._id) : false)
+    setNewChat(response)
     console.log(newChat)
   }
 

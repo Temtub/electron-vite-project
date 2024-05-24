@@ -35,7 +35,7 @@ ReactDOM.createRoot(document.getElementById('root') ).render(
           <Route index path='/chat' element= { <DefaultChatBox></DefaultChatBox> }></Route>       
           
           {/* Here will go the chats of the specific user */}
-          <Route path='/chat/:' element= { <Chat></Chat> }></Route>       
+          <Route path='/chat/:idChatParam' element= { <Chat></Chat> }></Route>       
           
         </Route>
 
