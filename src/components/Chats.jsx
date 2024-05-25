@@ -31,7 +31,7 @@ function Chats({ data }) {
         fetchData();
     }, [data]);
     
-    console.log(chatsData)
+    // console.log(chatsData)
     return (
         <aside className="chats">
             {/* If theres no data it shows it, if theres no also and if alls correct dont show it */}

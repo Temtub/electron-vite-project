@@ -14,31 +14,33 @@ import Chat from "Components/Chat"
 import DefaultChatBox from 'Components/DefaultChatBox';
 import Login from 'Components/Login/Login';
 import Register from 'Components/Register/Form';
+import Layout from 'Components/Layouts/Layout';
+import Navbar from 'Components/Layouts/Navbar';
+
 
 ReactDOM.createRoot(document.getElementById('root') ).render(
   <React.StrictMode>
 
     {/* The router */}
     <Router>
-      {/* Routes of the page */}
       <Routes>
-
         {/* Login */}
-        <Route index path='/' element= { <Login/> }></Route>  
-        {/* Register */}
-        <Route path='/register' element= { <Register></Register>}></Route>
-
-        {/* Main route of the page that will contain all the users*/}
-        <Route path="/chat" element={ <Messages></Messages> }>   
+        <Route index path='/' element={ <Login /> } />
         
-          {/* The message that will show if theres no chat selected */}
-          <Route index path='/chat' element= { <DefaultChatBox></DefaultChatBox> }></Route>       
-          
-          {/* Here will go the chats of the specific user */}
-          <Route path='/chat/:idChatParam' element= { <Chat></Chat> }></Route>       
-          
+        {/* Register */}
+        <Route path='/register' element={ <Register /> } />
+        
+        {/* Main route of the page that will contain the navbar */}
+        <Route path="/" element={ <Layout /> }>
+          {/* Main route for the chat */}
+          <Route path="/chat" element={ <Messages /> }>
+            {/* The message that will show if there's no chat selected */}
+            <Route index element={ <DefaultChatBox /> } />
+            
+            {/* Chats of the specific user */}
+            <Route path=":idChatParam" element={ <Chat /> } />
+          </Route>
         </Route>
-
       </Routes>
     </Router>
 

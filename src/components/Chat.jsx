@@ -38,13 +38,14 @@ function Chat() {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+
     if (inputText.trim() !== '') {
 
       //Save the moment in wich the message has been sent
       let instantMoment = new Date()
+
       let userdata = await getUserDataByToken(userToken)
 
-      console.log(userdata)
       // If the token checking is false means that the user has been disconnected
       if (!userdata.status) {
         console.log("Reenviado")
@@ -52,7 +53,7 @@ function Chat() {
       }
 
       // Create the data for the message we going to create
-      let userId = userdata.decoded.data.id
+      let userId = userdata.data.data.id
       const data = {
         time: instantMoment,
         message: inputText,
@@ -61,13 +62,16 @@ function Chat() {
       }
 
       let response = await restful("POST", "http://localhost:3001/api/chat/newMessage", data)
-      console.log(response)
       setChatHistory([...chatHistory, response]);
-
+      console.log(chatHistory)
       setInputText('');
     }
   };
+
+
   console.log(chatHistory)
+
+
   return (
     <div className='chat'>
 
