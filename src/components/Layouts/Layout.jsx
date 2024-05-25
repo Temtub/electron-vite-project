@@ -4,11 +4,11 @@ import { Outlet } from 'react-router-dom';
 
 const Layout = () => {
   return (
-    <div>
+    <div className='d-flex flex-row'>
       <Navbar />
-      <main>
+      
         <Outlet />
-      </main>
+      
     </div>
   );
 };

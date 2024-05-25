@@ -21,14 +21,27 @@ function Chat() {
   useEffect(() => {
     setChatHistory([])
 
+    const chargeUserData = async () =>{
+      let userdata = await getUserDataByToken(userToken)
+      // If the token checking is false means that the user has been disconnected
+      if (!userdata.status) {
+        console.log("Reenviado")
+        return navigate('/');
+      }
+  
+      // Create the data for the message we going to create
+      let userId = userdata.data.data.id
+      setUserIdState(userId)
+
+    }
     const getChats = async (chatId) => {
       let response = await restful("GET", "http://localhost:3001/api/chat/" + chatId)
-      // console.log(response.data.messages)
       setChatHistory(response.data.messages)
-      // console.log(chatHistory)
     }
 
+    chargeUserData()
     getChats(idChatParam)
+
   }, [idChatParam])
 
 
@@ -43,24 +56,12 @@ function Chat() {
   
       // Save the moment in which the message has been sent
       let instantMoment = new Date()
-  
-      let userdata = await getUserDataByToken(userToken)
-  
-      // If the token checking is false means that the user has been disconnected
-      if (!userdata.status) {
-        console.log("Reenviado")
-        return navigate('/');
-      }
-  
-      // Create the data for the message we going to create
-      let userId = userdata.data.data.id
-      setUserIdState(userId)
 
       const data = {
         time: instantMoment,
         message: inputText,
         chatId: idChatParam,
-        userId: userId
+        userId: userIdState
       }
   
       let response = await restful("POST", "http://localhost:3001/api/chat/newMessage", data)

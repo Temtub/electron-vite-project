@@ -73,6 +73,7 @@ function Login() {
                                 type="text"
                                 placeholder="Enter your name"
                                 onChange={(e) => setUser(e.target.value)}
+                                autoFocus
                             />
                         </Form.Group>
 

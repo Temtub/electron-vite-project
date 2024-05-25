@@ -46,8 +46,10 @@ function Messages() {
 
   return (
     <div className='messages'>
-      <aside className='ps-1 d-flex flex-column align-items-center'>
-        <button title='Añade un nuevo chat' className='serchChatButton' disabled={loading ?  true : false} onClick={searchNewChat}>{loading ? 'Buscando...' : <i class="fa-solid fa-plus"></i>}</button>
+
+      <aside className='ps-1 d-flex flex-column align-items-start'>
+        <h2>Chats</h2>
+        <button title='Añade un nuevo chat' className='serchChatButton' disabled={loading ? true : false} onClick={searchNewChat}>{loading ? 'Buscando...' : <i className="fa-solid fa-plus"></i>}</button>
         {/* If the data of the chats of the user is filled then show it else show that it is charging */}
         {userData ? <Chats data={userData.chats}></Chats> : <ChargingChats />}
       </aside>

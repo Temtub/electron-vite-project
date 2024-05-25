@@ -8,6 +8,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import './styles/login.css'
 import './styles/index.css'
 import './styles/chats.css'
+import './styles/navbar.css'
 
 //Import the components (as you can see the route is from Components thanks to the configuration we made in tsconfig.json)
 import Messages from 'Components/Messages';
