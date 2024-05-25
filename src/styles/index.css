@@ -23,85 +23,8 @@ body{
   width: 100%;
   min-height: 100vh; 
   /* padding-top: 10%; */
+  display: flow-root;
 }
-
-/* Messages part  */
-.messages{
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.chat{
-  border: 1px solid #f9f9f9;
-  border-radius: 3px;
-  box-shadow: #2135473f 1px 1px 10px 10px inset;
-
-  padding: 20px;
-  padding-bottom: 5px;
-
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.chat__history{
-  overflow-y: scroll;
-  height: 300px;
-  width: 600px;
-}
-/* Styles of the scrollbar  */
-.chat__history::-webkit-scrollbar {
-  width: 8px;               /* width of the entire scrollbar */
-}
-.chat__history::-webkit-scrollbar-track {
-  background: rgba(255, 166, 0, 0);        /* color of the tracking area */
-}
-.chat__history::-webkit-scrollbar-thumb {
-  background-color: rgb(61, 61, 61);    /* color of the scroll thumb */
-  border-radius: 20px;       /* roundness of the scroll thumb */
-  border: 3px solid rgba(255, 166, 0, 0);  /* creates padding around scroll thumb */
-}
-
-.chat__submit{
-  width: 100%;  
-  display: flex;
-  flex-direction: row;  
-  margin-bottom: 10px;
-}
-.chat__submitInput{/* Input that you write in*/
-  all: unset;
-  width: 100%;
-  background-color: #242424;  
-  padding: 3px;
-  
-  border-radius: 4px 0px 0px 4px;
-  border: 1px solid black;
-  border-right: 0px;
-}
-.chat__sendButton{/* Button to send the message */
-  all: unset;
-
-  border-radius: 0px 4px 4px 0px;
-  border: 1px solid black;
-  border-left: 0px;
-  width: 30px;
-  background-color: #242424;
-}
-/* Just one messeage */
-.message{
-  background-color: rgba(0, 255, 255, 0.651);
-  margin: 10px;
-  border-radius: 5px;
-
-  padding: 5px;
-  padding-left: 8px;
-  padding-right: 8px;
-  max-width: 350px;
-  width: fit-content;
-  overflow-wrap: break-word;
-} 
-/* END Messages part  */
 
 /* ----------- FONT AWESOME STYLES ------- */
 

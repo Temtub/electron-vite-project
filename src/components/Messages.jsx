@@ -5,7 +5,7 @@ import { useCheckSession } from '../services/hooks/useCheckSession';
 import { getNewChat } from '../services/getNewChat';
 
 import ChargingChats from './ChargingChats';
-import Friends from './Chats';
+import Chats from './Chats';
 import { restful } from "/restApi"
 import { useEffect, useState } from 'react';
 let token;
@@ -38,7 +38,6 @@ function Messages() {
     if (userData) {
       setLoading(true);
       const response = await getNewChat(userData._id);
-      console.log(response)
       setLoading(false);
       navigate(`/chat/${response._id}`);
     }
@@ -47,10 +46,10 @@ function Messages() {
 
   return (
     <div className='messages'>
-      <aside>
-        <button disabled={loading ?  true : false} onClick={searchNewChat}>{loading ? 'Loading...' : 'Buscar un chat'}</button>
+      <aside className='ps-1 d-flex flex-column align-items-center'>
+        <button title='Añade un nuevo chat' className='serchChatButton' disabled={loading ?  true : false} onClick={searchNewChat}>{loading ? 'Buscando...' : <i class="fa-solid fa-plus"></i>}</button>
         {/* If the data of the chats of the user is filled then show it else show that it is charging */}
-        {userData ? <Friends data={userData.chats}></Friends> : <ChargingChats />}
+        {userData ? <Chats data={userData.chats}></Chats> : <ChargingChats />}
       </aside>
 
       <Outlet></Outlet>

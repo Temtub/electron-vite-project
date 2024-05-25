@@ -15,7 +15,7 @@ function Chats({ data }) {
             if (data && data.length > 0) {
                 try {
                     const response = await restful('POST', 'http://localhost:3001/api/chat/chats', { chats: data });
-                    
+
                     if (response.hasOwnProperty('status') && response.status === false) {
                         setError(response.msg);
                     } else {
@@ -30,20 +30,24 @@ function Chats({ data }) {
 
         fetchData();
     }, [data]);
-    
-    console.log(chatsData)
+
+
     return (
         <aside className="chats">
-            {/* If theres no data it shows it, if theres no also and if alls correct dont show it */}
-            {error ? (
-                <div className="error">{error}</div>
-            ) : (
-                chatsData.length === 0 ? (
-                    <div>Empty</div>
+            <h2>Chats</h2>
+            <div>
+
+                {/* If theres no data it shows it, if theres no also and if alls correct dont show it */}
+                {error ? (
+                    <div className="error">{error}</div>
                 ) : (
-                    chatsData.map(chat => <ChatBox key={chat._id} name={chat.name} id={chat._id} />)
-                )
-            )}
+                    chatsData.length === 0 ? (
+                        <div>Empty</div>
+                    ) : (
+                        chatsData.map(chat => <ChatBox key={chat._id} name={chat.name} id={chat._id} />)
+                    )
+                )}
+            </div>
         </aside>
     );
 }

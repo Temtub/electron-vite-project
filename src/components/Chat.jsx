@@ -15,7 +15,7 @@ function Chat() {
 
   const [inputText, setInputText] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
-
+  const [userIdState, setUserIdState] = useState("")
 
   //Clear the chat history when changing the chat 
   useEffect(() => {
@@ -35,10 +35,6 @@ function Chat() {
   const handleInputChange = (event) => {
     setInputText(event.target.value);
   };
-
-  useEffect(() => {
-    console.log(chatHistory);
-  }, [chatHistory]);
   
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -58,6 +54,8 @@ function Chat() {
   
       // Create the data for the message we going to create
       let userId = userdata.data.data.id
+      setUserIdState(userId)
+
       const data = {
         time: instantMoment,
         message: inputText,
@@ -66,31 +64,22 @@ function Chat() {
       }
   
       let response = await restful("POST", "http://localhost:3001/api/chat/newMessage", data)
-      
-      // Log the response before updating the state
-      console.log("Response: ", response);
   
       setChatHistory(prevChatHistory => {
         const updatedChatHistory = [...prevChatHistory, response];
-        console.log("Updated chat history: ", updatedChatHistory);
         return updatedChatHistory;
       });
   
       setInputText('');
     }
   };
-  
-
-
-  console.log(chatHistory)
-
 
   return (
     <div className='chat'>
 
       <div className="chat__history">
         {chatHistory && chatHistory.map((message, index) => (
-          <Message key={(message._id ? message._id : index)} text={message.content}></Message>
+          <Message key={(message._id ? message._id : index)} actualUser={userIdState} sender={message.sender} text={message.content}></Message>
         ))}
       </div>
 

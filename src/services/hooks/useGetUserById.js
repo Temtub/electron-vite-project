@@ -10,7 +10,6 @@ export const useGetUserById = (id) => {
     }
 
     useEffect( () => {
-        console.log(id)
         loadUser(id)
     }, [id])
 

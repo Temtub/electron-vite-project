@@ -14,35 +14,36 @@ function Register() {
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
 
-    const [emptyValue, setEmptyValue ] = useState(false)
-    const [diffPassword, setDiffPassword ] = useState(false)
+    const [emptyValue, setEmptyValue] = useState(false)
+    const [diffPassword, setDiffPassword] = useState(false)
     const [mensaje, setMensaje] = useState('');
 
     const handleSubmit = async (event) => {
         event.preventDefault();
-        
+
         if (!nombre || !email || !password || !confirmPassword) {
             setMensaje('Por favor, rellena todos los campos.');
         } else if (password !== confirmPassword) {
             setMensaje('Las passwords no coinciden.');
         } else {
             const data = {
-                user : nombre,
-                pass : password,
-                email : email
+                user: nombre,
+                pass: password,
+                email: email
             }
             let response = await restful("POST", "http://localhost:3001/api/register", data)
-            console.log(response)
         }
 
-      };
-      return (
-        <Container className="loginCard d-flex">
-            <Row className="w-50 justify-content-md-center align-items-start">
-                <h1>Regístrate</h1>
+    };
+    return (
+        <Container className="loginCard d-flex flex-column flex-md-row">
+            <Row className="w-100 w-md-50 justify-content-md-center align-items-start">
+                <Col>
+                    <h1>Regístrate</h1>
+                </Col>
             </Row>
             
-            <Row className="w-50 justify-content-md-center">
+            <Row className="w-100 w-md-50 justify-content-md-center">
                 <Col xs={12} md={10}>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="formGroup" controlId="formBasicName">
@@ -67,8 +68,8 @@ function Register() {
                             />
                         </Form.Group>
 
-                        <Row>
-                            <Col xs={6}>
+                        <Row className="d-flex flex-column flex-md-row">
+                            <Col xs={12} md={6}>
                                 <Form.Group className="formGroup" controlId="formBasicPassword">
                                     <Form.Label className="formLabel">Contraseña:</Form.Label>
                                     <Form.Control
@@ -81,7 +82,7 @@ function Register() {
                                 </Form.Group>
                             </Col>
 
-                            <Col xs={6}>
+                            <Col xs={12} md={6}>
                                 <Form.Group className="formGroup" controlId="formBasicConfirmPassword">
                                     <Form.Label className="formLabel">Repite la contraseña:</Form.Label>
                                     <Form.Control
@@ -96,8 +97,8 @@ function Register() {
                         </Row>
                         {mensaje && <ShowMessage msg={mensaje}></ShowMessage>}
 
-                        <div className="buttonGroup d-flex flex-row justify-content-between">
-                            <Link to="/" className="btn ">
+                        <div className="buttonGroup d-flex flex-column flex-md-row justify-content-between">
+                            <Link to="/" className="btn mb-2 mb-md-0">
                                 Iniciar sesión
                             </Link>
                             <Button variant="primary" type="submit" className="btn btnLogin" id="send">
@@ -110,6 +111,7 @@ function Register() {
         </Container>
     );
 };
+
 
 
 export default Register
