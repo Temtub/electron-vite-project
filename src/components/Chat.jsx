@@ -36,22 +36,26 @@ function Chat() {
     setInputText(event.target.value);
   };
 
+  useEffect(() => {
+    console.log(chatHistory);
+  }, [chatHistory]);
+  
   const handleSubmit = async (event) => {
     event.preventDefault();
-
+  
     if (inputText.trim() !== '') {
-
-      //Save the moment in wich the message has been sent
+  
+      // Save the moment in which the message has been sent
       let instantMoment = new Date()
-
+  
       let userdata = await getUserDataByToken(userToken)
-
+  
       // If the token checking is false means that the user has been disconnected
       if (!userdata.status) {
         console.log("Reenviado")
-        navigate('/');
+        return navigate('/');
       }
-
+  
       // Create the data for the message we going to create
       let userId = userdata.data.data.id
       const data = {
@@ -60,13 +64,22 @@ function Chat() {
         chatId: idChatParam,
         userId: userId
       }
-
+  
       let response = await restful("POST", "http://localhost:3001/api/chat/newMessage", data)
-      setChatHistory([...chatHistory, response]);
-      console.log(chatHistory)
+      
+      // Log the response before updating the state
+      console.log("Response: ", response);
+  
+      setChatHistory(prevChatHistory => {
+        const updatedChatHistory = [...prevChatHistory, response];
+        console.log("Updated chat history: ", updatedChatHistory);
+        return updatedChatHistory;
+      });
+  
       setInputText('');
     }
   };
+  
 
 
   console.log(chatHistory)
