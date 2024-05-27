@@ -39,6 +39,9 @@ function Messages() {
       setLoading(true);
       const response = await getNewChat(userData._id);
       setLoading(false);
+      if(typeof response._id == 'undefined'){
+        return
+      }
       navigate(`/chat/${response._id}`);
     }
   };

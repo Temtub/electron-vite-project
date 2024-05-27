@@ -24,6 +24,7 @@ import Navbar from 'Components/Layouts/Navbar';
 import styled, { createGlobalStyle } from 'styled-components';
 import { ThemeProvider } from './styles/ThemeContext';
 import { ViewGroups } from 'Components/Groups/ViewGroups';
+import { CreateGroup } from 'Components/Groups/CreateGroup';
 
 
 
@@ -67,6 +68,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
             </Route>
             <Route path="/group" element={<ViewGroups />} />
+            <Route path="/createGroup" element={<CreateGroup />} />
           </Route>
         </Routes>
       </Router>

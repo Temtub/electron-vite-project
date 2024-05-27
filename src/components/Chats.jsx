@@ -43,7 +43,7 @@ function Chats({ data }) {
                     chatsData.length === 0 ? (
                         <div>Empty</div>
                     ) : (
-                        chatsData.map(chat => <ChatBox key={chat._id} name={chat.name} id={chat._id} />)
+                        chatsData.map(chat => <ChatBox key={chat._id} name={chat.name} id={chat._id} friends={chat.friends}/>)
                     )
                 )}
             </div>
