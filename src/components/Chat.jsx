@@ -34,6 +34,7 @@ function Chat() {
       setUserIdState(userId)
 
     }
+    
     const getChats = async (chatId) => {
       let response = await restful("GET", "http://localhost:3001/api/chat/" + chatId)
       setChatHistory(response.data.messages)

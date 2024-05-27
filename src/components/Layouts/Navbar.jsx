@@ -7,6 +7,7 @@ import ConfigButton from './ConfigButton.jsx';
 
 const CustomNavbar = () => {
 
+  const navigate = useNavigate();
     
 
     return (

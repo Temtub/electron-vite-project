@@ -2,6 +2,7 @@
     height: 100vh;
     width: 55PX;
     background-color: #222224 !important;
+    padding: 0 !important;
 }
 
 .navbar__button {
