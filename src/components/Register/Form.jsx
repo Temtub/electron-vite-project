@@ -1,22 +1,22 @@
 import { useState } from "react";
 import { Link } from 'react-router-dom';
-
 import { restful } from "/restApi/index"
-
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
 import { ShowMessage } from "Components/specialMessages/ShowMessage";
+import { useNavigate } from "react-router-dom";
 
 function Register() {
     const [nombre, setNombre] = useState('');
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-
     const [emptyValue, setEmptyValue] = useState(false)
     const [diffPassword, setDiffPassword] = useState(false)
     const [mensaje, setMensaje] = useState('');
+    const [error, setError] = useState("")
+
+    const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -32,22 +32,29 @@ function Register() {
                 email: email
             }
             let response = await restful("POST", "http://localhost:3001/api/register", data)
+            console.log(response)
+            if(!response.status){
+                setError(response.msg)
+            }else{
+                navigate("/Usuario registrado")
+            }
         }
 
     };
     return (
         <Container className="loginCard d-flex flex-column flex-md-row">
-            <Row className="w-100 w-md-50 justify-content-md-center align-items-start">
+            <Row className="formText w-75 justify-content-md-center align-items-start">
                 <Col>
                     <h1>Regístrate</h1>
                 </Col>
             </Row>
             
-            <Row className="w-100 w-md-50 justify-content-md-center">
-                <Col xs={12} md={10}>
+            <Row className="formRegister w-100 justify-content-md-center">
+                <Col xs={12} md={12}>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="formGroup" controlId="formBasicName">
                             <Form.Label className="formLabel">Nombre:</Form.Label>
+
                             <Form.Control
                                 className="formInput"
                                 type="text"
@@ -95,13 +102,13 @@ function Register() {
                                 </Form.Group>
                             </Col>
                         </Row>
-                        {mensaje && <ShowMessage msg={mensaje}></ShowMessage>}
+                        {error && <ShowMessage msg={error}></ShowMessage>}
 
-                        <div className="buttonGroup d-flex flex-column flex-md-row justify-content-between">
-                            <Link to="/" className="btn mb-2 mb-md-0">
+                        <div className="buttonGroup d-flex flex-column-reverse flex-md-row justify-content-between">
+                            <Link to="/" className="btn mb-2 ">
                                 Iniciar sesión
                             </Link>
-                            <Button variant="primary" type="submit" className="btn btnLogin" id="send">
+                            <Button variant="primary" type="submit" className="btn btnLogin mb-2" id="send">
                                 Registrarse
                             </Button>
                         </div>

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
-import { Link, useNavigate } from "react-router-dom"
-import { Container, Row, Col, Form, Button, ButtonGroup } from 'react-bootstrap';
+import { Link, useNavigate, useParams } from "react-router-dom"
+import { Container, Row, Col, Form, Button, ButtonGroup, Alert } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { restful } from "/restApi/index"
 
@@ -12,10 +12,9 @@ function Login() {
     const navigate = useNavigate();
     const [user, setUser] = useState("")
     const [pass, setPass] = useState("")
-
     const [correctLogin, setCorrectLogin] = useState(false)
-
     const [error, setError] = useState("")
+    const { msg } = useParams()
 
     const formManagement = async (e) => {
         e.preventDefault()
@@ -61,6 +60,10 @@ function Login() {
                     <h1>Inicia sesión</h1>
                     <p>Escribe tu nombre y tu contraseña</p>
                 </Col>
+
+                {msg && <Alert className="alert" key={'info'} variant={'info'}>
+                    {msg}
+                </Alert>}
             </Row>
 
             <Row className="w-100 w-md-50 justify-content-md-center">
@@ -89,11 +92,11 @@ function Login() {
 
                         {error && <ShowMessage msg={error}></ShowMessage>}
 
-                        <div className="buttonGroup d-flex flex-column flex-md-row justify-content-between">
-                            <Link to="/register" className="btn mb-2 mb-md-0">
+                        <div className="buttonGroup d-flex flex-column-reverse flex-md-row justify-content-between">
+                            <Link to="/register" className="btn mb-2">
                                 Registrarse
                             </Link>
-                            <Button variant="primary" type="submit" className="btn btnLogin" id="send">
+                            <Button variant="primary" type="submit" className="btn btnLogin mb-2" id="send">
                                 Iniciar sesión
                             </Button>
                         </div>
@@ -101,12 +104,12 @@ function Login() {
                 </Col>
             </Row>
 
-            <div className="containerRabbit d-none d-md-flex justify-content-center mt-3">
+            {/* <div className="containerRabbit d-none d-md-flex justify-content-center mt-3">
                 <img className="bottom-image" src="../src/assets/images/conejo.png" alt="Rabbit" />
                 <div className="speech-bubble">
                     <p>¡Bienvenido de nuevo!</p>
                 </div>
-            </div>
+            </div> */}
         </Container>
     );
 };

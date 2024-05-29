@@ -1,11 +1,11 @@
-
-*{
+* {
   box-sizing: border-box;
 }
-body{
+
+body {
   margin: 0;
 }
-  
+
 #root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -21,14 +21,14 @@ body{
   -moz-osx-font-smoothing: grayscale;
 
   width: 100%;
-  min-height: 100vh; 
+  min-height: 100vh;
   /* padding-top: 10%; */
   display: flow-root;
 }
 
 /* ----------- FONT AWESOME STYLES ------- */
 
-.fa-info{
+.fa-info {
   margin-right: 10px;
   margin-left: 5px;
 
@@ -39,15 +39,28 @@ body{
   border-radius: 15px;
   width: 15px;
   height: 15px;
-  
+
 }
 
+/* -------- ALERT ---------  */
+.alert {
+  height: 50px;
+  height: auto;
+  padding: 12px !important;
+  overflow: visible;
+}
 
 /* ------ ESPECIAL COLORS ----- */
-.redError{
+.redError {
   color: #D93025;
 }
-.colorBlack{
+
+.colorBlack {
   color: black;
 }
 
+@media (min-width: 767.98px) {
+  .alert {
+    width: 80% !important;
+  }
+}

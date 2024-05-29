@@ -34,7 +34,7 @@ const ConfigButton = () => {
 
     const logout = () => {
         localStorage.removeItem('token');
-        navigate('/');
+        navigate('/Se ha cerrado sesión');
     };
 
     return (

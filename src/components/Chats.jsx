@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { restful } from '/restApi/index.js';
 import ChatBox from './ChatBox';
+import { useCheckSession } from '../services/hooks/useCheckSession';
 
 function Chats({ data }) {
+    const userData = useCheckSession()
     const [chatsData, setChatsData] = useState([]);
     const [error, setError] = useState("");
 
@@ -31,7 +33,6 @@ function Chats({ data }) {
         fetchData();
     }, [data]);
 
-
     return (
         <aside className="chats">
             <div>
@@ -43,7 +44,7 @@ function Chats({ data }) {
                     chatsData.length === 0 ? (
                         <div>Empty</div>
                     ) : (
-                        chatsData.map(chat => <ChatBox key={chat._id} name={chat.name} id={chat._id} friends={chat.friends}/>)
+                        chatsData.map(chat => <ChatBox key={chat._id} name={chat.name} users={chat.users} id={chat._id} friends={userData.data.friends}/>)
                     )
                 )}
             </div>

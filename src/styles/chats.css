@@ -88,7 +88,8 @@
     width: fit-content;
     overflow-wrap: break-word;
 }
-.messageByUser{
+
+.messageByUser {
     background-color: #474786;
 }
 
@@ -122,4 +123,58 @@
 .serchChatButton:hover {
     background-color: rgb(236, 236, 236);
     color: #474786;
+}
+
+
+.addFriendButton {
+
+    border: 1px solid black;
+    background-color: #0A58CA;
+    border-radius: 5px;
+
+}
+
+.addFriendButton:hover {
+    background-color: #0066ff;
+}
+
+.messages {
+    display: flex;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.chat-sidebar {
+    width: 300px;
+    /* Adjust as necessary */
+    overflow-y: auto;
+    flex-shrink: 0;
+}
+
+.chat-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    display: none;
+    /* Initially hidden on small screens */
+}
+
+/* Media query for small screens */
+@media (max-width: 767.98px) {
+    .messages {
+        flex-direction: column;
+    }
+
+    .chat-sidebar {
+        width: 100%;
+        height: 100vh;
+        display: var(--show-chat-list);
+        /* CSS variable to toggle visibility */
+    }
+
+    .chat-content {
+        width: 100%;
+        height: 100vh;
+        display: var(--show-chat);
+        /* CSS variable to toggle visibility */
+    }
 }

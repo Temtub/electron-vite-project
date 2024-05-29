@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-
 //Import the components that we will need
 import Message from "Components/Message";//Box for a single message
 import { getUserDataByToken } from '../services/getUserDataByToken';
@@ -9,10 +8,9 @@ import { restful } from "/restApi/index.js"
 function Chat() {
 
   const userToken = localStorage.getItem("token")
-  //Get the id of the user you want to show the chat from the url
-  const { idChatParam } = useParams()
+  const { idChatParam } = useParams()//Get the id of the user you want to show the chat from the url
   const navigate = useNavigate();
-
+  const chatHistoryRef = useRef(null);
   const [inputText, setInputText] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
   const [userIdState, setUserIdState] = useState("")
@@ -45,6 +43,13 @@ function Chat() {
 
   }, [idChatParam])
 
+  useEffect(() => {
+    scrollToBottom();
+  }, [chatHistory]);
+
+  const scrollToBottom = () => {
+    chatHistoryRef.current?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   const handleInputChange = (event) => {
     setInputText(event.target.value);
@@ -78,30 +83,33 @@ function Chat() {
 
   return (
     <div className='chat'>
-
-      <div className="chat__history">
+      <div className="chat__history" style={{ overflowY: 'auto', height: 'calc(100vh - 60px)' }}>
         {chatHistory && chatHistory.map((message, index) => (
-          <Message key={(message._id ? message._id : index)} actualUser={userIdState} sender={message.sender} text={message.content}></Message>
+          <Message
+            key={(message._id ? message._id : index)}
+            actualUser={userIdState}
+            sender={message.sender}
+            text={message.content}
+          />
         ))}
+        <div ref={chatHistoryRef} />
       </div>
 
-      <form onSubmit={handleSubmit} className='chat__submit'>
+      <form onSubmit={handleSubmit} className='chat__submit' style={{ display: 'flex', padding: '10px', borderTop: '1px solid #ddd' }}>
         <input
           className='chat__submitInput'
           type="text"
           value={inputText}
           onChange={handleInputChange}
           placeholder="Escribe un mensaje..."
+          style={{ flexGrow: 1}}
         />
-
         <button className='chat__sendButton' type="submit">
           <i className="fa-solid fa-paper-plane"></i>
         </button>
-
       </form>
-
     </div>
   );
-}
+};
 
 export default Chat;

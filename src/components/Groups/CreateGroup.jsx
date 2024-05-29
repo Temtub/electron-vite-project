@@ -1,11 +1,18 @@
 import { Container, Row, Col, Form, Button, ButtonGroup } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import { useState } from 'react';
+import { useCheckSession } from '../../services/hooks/useCheckSession';
+import { SelectOfUsers } from './SelectOfusers';
 
 export function CreateGroup() {
 
-    const formManagement = () =>{
+    const userData = useCheckSession()
+
+    const formManagement = () => {
 
     }
+
+    
     return (
 
         <main>
@@ -26,23 +33,12 @@ export function CreateGroup() {
                             />
                         </Form.Group>
 
-                        <Form.Group className="formGroup" controlId="formBasicPassword">
-                            <Form.Label className="formLabel">Contraseña:</Form.Label>
-                            <Form.Control
-                                className="formInput"
-                                type="password"
-                                placeholder="Enter your password"
-                                onChange={(e) => setPass(e.target.value)}
-                            />
-                        </Form.Group>
+                        <SelectOfUsers friends={(userData ? userData.data.friends :  [])}></SelectOfUsers>
 
 
                         <div className="buttonGroup d-flex flex-column flex-md-row justify-content-between">
-                            <Link to="/register" className="btn mb-2 mb-md-0">
-                                Registrarse
-                            </Link>
                             <Button variant="primary" type="submit" className="btn btnLogin" id="send">
-                                Iniciar sesión
+                                Crear grupo
                             </Button>
                         </div>
                     </Form>
