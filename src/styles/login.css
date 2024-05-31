@@ -7,9 +7,11 @@
     position: relative;
     min-width: 250px;
 }
-.loginSide{
+
+.loginSide {
     /* height: 50px; */
 }
+
 /* ----------- FORM STYLES --------- */
 .formGroup {
     margin-bottom: 15px !important;
@@ -23,18 +25,53 @@
     margin-left: 10px;
     padding-left: 10px;
     padding-right: 10px;
+    z-index: 10;
+    position: relative;
+}
+
+
+input[type="file"] {
+    padding: 0;
+    position: relative;
+    padding: 10px;
+    padding-left: 30px;
+    /* padding-left: 0; */
+}
+
+input[type="file"]::after {
+    position: absolute;
+    pointer-events: none;
+    top: 12px;
+    left: 4px;
+    height: 20px;
+    width: 20px;
+    content: "";
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%230964B0'%3E%3Cpath d='M18 15v3H6v-3H4v3c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2v-3h-2zM7 9l1.41 1.41L11 7.83V16h2V7.83l2.59 2.58L17 9l-5-5-5 5z'/%3E%3C/svg%3E");
+}
+
+input[type="file"]::file-selector-button {
+    background-color: #242424;
+    color: white;
+    height: 100%;
+    /* width: 50%; */
 }
 
 .formInput {
     margin-top: -20px;
     background-color: #242424 !important;
     color: white !important;
-
+    border: 1px solid white;
     height: 52px;
 }
 
-.buttonGroup {
+.formCheckGroup {
+    border: 1px solid white;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: -18px !important;
+}
 
+.buttonGroup {
     width: 100%;
 }
 
@@ -86,7 +123,7 @@
 .speech-bubble::after {
     content: '';
     position: absolute;
-    bottom:     0px;
+    bottom: 0px;
     left: 30%;
     transform: translateX(-100%);
     width: 0;
@@ -103,17 +140,19 @@
     text-align: center;
 }
 
+
+
 @media (max-width: 767.98px) {
     .loginCard {
         min-height: 120vh;
-        
+
     }
 }
 
 @media (min-width: 767.98px) {
     .loginCard {
-       margin-top: 10% !important;
-       width: 50% !important;
+        margin-top: 10% !important;
+        width: 50% !important;
     }
 }
 
@@ -122,7 +161,8 @@
     .formRegister {
         width: 80% !important;
     }
-    .formText{
+
+    .formText {
         width: 20% !important;
     }
 }

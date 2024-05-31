@@ -19,14 +19,12 @@ import Login from 'Components/Login/Login';
 import Register from 'Components/Register/Form';
 import Layout from 'Components/Layouts/Layout';
 import Navbar from 'Components/Layouts/Navbar';
-
+import { Preferences } from 'Components/Register/Preferences';
 
 import styled, { createGlobalStyle } from 'styled-components';
 import { ThemeProvider } from './styles/ThemeContext';
 import { ViewGroups } from 'Components/Groups/ViewGroups';
 import { CreateGroup } from 'Components/Groups/CreateGroup';
-
-
 
 // const GlobalStyle = createGlobalStyle`
 //   body {
@@ -56,6 +54,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
           {/* Register */}
           <Route path='/register' element={<Register />} />
+          <Route path='/preferences/:userId' element={<Preferences />} />
 
           {/* Main route of the page that will contain the navbar */}
           <Route path="/" element={<Layout />}>

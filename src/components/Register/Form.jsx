@@ -15,7 +15,6 @@ function Register() {
     const [diffPassword, setDiffPassword] = useState(false)
     const [mensaje, setMensaje] = useState('');
     const [error, setError] = useState("")
-
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
@@ -36,7 +35,8 @@ function Register() {
             if(!response.status){
                 setError(response.msg)
             }else{
-                navigate("/Usuario registrado")
+                
+                navigate("/preferences/"+response.data._id)
             }
         }
 

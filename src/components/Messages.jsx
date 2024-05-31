@@ -17,6 +17,7 @@ function Messages() {
   const [newChat, setNewChat] = useState([])
   const [showChatList, setShowChatList] = useState(true);
   const [showChat, setShowChat] = useState(true);
+  
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -44,11 +45,6 @@ function Messages() {
   const handleChatClick = () => {
     setShowChat(true);
     setShowChatList(false);
-  };
-
-  const handleBackToChats = () => {
-    setShowChat(false);
-    setShowChatList(true);
   };
 
   const searchNewChat = async () => {
@@ -83,12 +79,11 @@ function Messages() {
 
       <Row className={`chat-content ${showChat ? 'd-block' : 'd-none'}`}>
         <Col>
-          <Button className="mb-2" onClick={handleBackToChats}>
-            Volver a Chats
-          </Button>
+          
           <Outlet />
         </Col>
       </Row>
+
     </Container>
   );
 };

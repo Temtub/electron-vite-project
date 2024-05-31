@@ -49,11 +49,6 @@ function ChatBox ({ id, chatName, friends = [], users }) {
                     <p>Información adicional sobre el amigo...</p>
                 </div>
 
-                {!friends.includes(id) && (
-                    <button className="addFriendButton" id={id} onClick={addFriend}>
-                        <i className="fa-solid fa-user-plus"></i>
-                    </button>
-                )}
             </Link>
         </div>
     );
