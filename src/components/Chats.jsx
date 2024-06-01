@@ -32,10 +32,11 @@ function Chats({ data }) {
 
         fetchData();
     }, [data]);
-
+    
+    console.log(chatsData)
+    console.log(userData)
     return (
         <aside className="chats">
-            <div>
 
                 {/* If theres no data it shows it, if theres no also and if alls correct dont show it */}
                 {error ? (
@@ -44,10 +45,10 @@ function Chats({ data }) {
                     chatsData.length === 0 ? (
                         <div>Empty</div>
                     ) : (
-                        chatsData.map(chat => <ChatBox key={chat._id} name={chat.name} users={chat.users} id={chat._id} friends={userData.data.friends}/>)
+                        chatsData.map(chat => <ChatBox key={chat._id} chatName={chat.name} users={chat.users} id={chat._id} friends={userData.data.friends} icon={chat.icon}/>)
                     )
                 )}
-            </div>
+            
         </aside>
     );
 }

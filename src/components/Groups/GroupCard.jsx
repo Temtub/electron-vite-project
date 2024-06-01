@@ -2,10 +2,10 @@ import Card from 'react-bootstrap/Card';
 
 import { getUserDataByToken } from '../../services/getUserDataByToken';
 import { useState, useEffect } from 'react';
-
 import { restful } from "/restApi/index.js"
 import { useCheckSession } from "../../services/hooks/useCheckSession"
 import { useNavigate } from 'react-router';
+
 export function GroupCard({ group }) {
 
     const userData = useCheckSession()
@@ -14,14 +14,11 @@ export function GroupCard({ group }) {
     const joinGroup = async (event) => {
         const chatId = event.currentTarget.id
         const userId = userData.data.id
-        console.log(userId)
-        console.log(chatId)
         
         let response = await restful("POST", `http://localhost:3001/api/chat/addUserToChat`, { userId, chatId })
-        console.log(response)
+        navigate("/chat/"+response.data.chat._id)
     }
 
-    // console.log(group)
     return (
         <Card className="mb-3" >
             <Card.Body>

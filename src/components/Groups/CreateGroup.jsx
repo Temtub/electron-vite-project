@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
-// import {ShowMessage} from '../specialMessages/ShowMessage';
+import { Link, useNavigate } from 'react-router-dom';
+import { ShowMessage } from '../specialMessages/ShowMessage';
 import { useCheckSession } from '../../services/hooks/useCheckSession';
 import { restful } from "/restApi/index.js"
 
@@ -14,6 +14,7 @@ export function CreateGroup() {
     const token = useCheckSession();
     const [userData, setUserData] = useState(null);
     const [selectedFriends, setSelectedFriends] = useState([]);
+    const navigate = useNavigate();
 
     useEffect(() => {
         const chargeMessages = async () => {
@@ -33,32 +34,39 @@ export function CreateGroup() {
     const formManagement = async (event) => {
         event.preventDefault();
 
-        if (!groupName || !image ) {
-            setMensaje('Por favor, rellena todos los campos.');
-        } else if ( selectedFriends < 2 ) {
-            setMensaje('Crea un grupo con al menos tres amigos');
+        if (!groupName || !image) {
+            setMsg('Por favor, rellena todos los campos.');
+        } else if (selectedFriends.length < 2) {
+            setMsg('Crea un grupo con al menos tres amigos');
         } else {
-            const users = [...selectedFriends, userData._id]
+            const users = [...selectedFriends, userData._id];
             const data = {
                 users,
                 name: groupName,
                 icon: image
-            }
-            // SEGUIR CON EL FORMULARIO DE CREACION DE GRUPOS, ENVIAR DATOS A EL BACKEND Y CREAR LA INFO ALLI
-            let response = await restful("POST", "http://localhost:3001/api/register", data)
-            console.log(response)
-            if(!response.status){
-                setError(response.msg)
-            }else{
-                
-                navigate("/preferences/"+response.data._id)
+            };
+
+            // Enviar datos al backend para crear el grupo
+            let response = await restful("POST", "http://localhost:3001/api/chat/createGroup", data);
+            if (!response.status) {
+                setError(response.msg);
+            } else {
+                navigate("/chat/"+response._id);
             }
         }
-
     };
 
-    const handleImageChange = (e) => {
-        setImage(e.target.files[0]);
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+            setImage(reader.result);
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+        }
     };
 
     const handleFriendChange = (friendId) => {
@@ -68,7 +76,7 @@ export function CreateGroup() {
                 : [...prevSelectedFriends, friendId]
         );
     };
-    console.log(userData)
+
     return (
         <Container className="loginCard d-flex flex-column flex-md-row">
             <Row className="w-100 w-md-50 justify-content-md-start align-items-start loginSide">
@@ -133,4 +141,3 @@ export function CreateGroup() {
         </Container>
     );
 }
-

@@ -9,8 +9,6 @@ export function GroupList({ groups }) {
 
     const [error, setError] = useState("")
 
-    // console.log(groups)
-
     return (
         <Container>
             <h3>Lista de grupos</h3>

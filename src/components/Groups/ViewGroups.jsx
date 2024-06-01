@@ -16,9 +16,7 @@ export function ViewGroups() {
     useEffect(() => {
         // const userId = userData.data.id
         const get20groups = async (userId) => {
-            
             let response = await restful("POST", `http://localhost:3001/api/chat/get20groups/`, {userId})
-            console.log(response)
 
             if(!response.status){
                 setError("Ha ocurrido un error...")
@@ -35,7 +33,6 @@ export function ViewGroups() {
 
     }, [userData])
 
-    console.log(userData)
     return (
 
         <div>

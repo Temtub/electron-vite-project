@@ -31,7 +31,6 @@ function Register() {
                 email: email
             }
             let response = await restful("POST", "http://localhost:3001/api/register", data)
-            console.log(response)
             if(!response.status){
                 setError(response.msg)
             }else{

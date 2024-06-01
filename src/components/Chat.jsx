@@ -88,7 +88,6 @@ function Chat() {
     navigate("/chat");
   };
 
-  console.log(chatHistory)
   return (
     <div className='chat'>
       <div className='d-flex flex-row justify-content-between'>

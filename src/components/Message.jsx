@@ -1,7 +1,6 @@
 
 function Message({ text, actualUser, sender, author }) {
 
-  // console.log(sender == actualUser)
   if (sender == actualUser) {
     return (
       <div className='message messageByUser' >

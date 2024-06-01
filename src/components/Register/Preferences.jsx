@@ -138,13 +138,11 @@ export function Preferences() {
             userId : userId
         }
         const response = await restful("POST", `http://localhost:3001/api/user/addDataToUser`, data)
-        console.log(response)
 
         if(!response.status ){
             setError(response.msg)
             return
         }else{
-            console.log(response)
             navigate("/¡¡¡Bienvenido, ya solo queda iniciar sesión!!!")
         }
 

@@ -20,7 +20,6 @@ export const useCheckSession = () => {
         localStorage.removeItem('token'); // Remove the token from local storage
         navigate('/Se ha cerrado sesión automaticamente'); // Redirect to the login page
       } else {
-        console.log("Token is still valid");
         setDecodedToken(decodedToken)
       }
     } else {
