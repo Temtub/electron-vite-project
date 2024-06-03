@@ -5,6 +5,7 @@ import { useNavigate } from "react-router"
 import { GroupList } from "./GroupList"
 import { ChargingGroupList } from "./ChargingGroupList"
 import { Link } from "react-router-dom"
+import { Button } from "react-bootstrap"
 export function ViewGroups() {
     
     const userData = useCheckSession()
@@ -35,11 +36,11 @@ export function ViewGroups() {
 
     return (
 
-        <div>
+        <div className="w-100">
 
             <h1>Grupos</h1>
         
-            <button onClick={()=>{navigate("/createGroup")}} title='Añade un nuevo grupo' className='serchChatButton' ><i className="fa-solid fa-plus"></i></button>
+            <Button onClick={()=>{navigate("/createGroup")}} title='Añade un nuevo grupo' className='searchChatButton' ><i className="fa-solid fa-plus"></i></Button>
 
             {groups ? <GroupList groups={groups}/> : <ChargingGroupList/>}
         </div>

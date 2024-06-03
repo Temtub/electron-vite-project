@@ -4,6 +4,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { ShowMessage } from '../specialMessages/ShowMessage';
 import { useCheckSession } from '../../services/hooks/useCheckSession';
 import { restful } from "/restApi/index.js"
+import { FriendCheck } from './FriendCheck';
 
 export function CreateGroup() {
     const [groupName, setGroupName] = useState('');
@@ -99,10 +100,11 @@ export function CreateGroup() {
                     <h1>Crea un grupo</h1>
                     <p>Escribe tu nombre, selecciona una imagen y elige a los amigos que quieren que estén contigo en el grupo, recuerda que el grupo será público.</p>
                 </Col>
-
-                {msg && <Alert className="alert" key={'info'} variant={'info'}>
-                    {msg}
-                </Alert>}
+                {msg && (
+                    <Alert className="alert" key={'info'} variant={'info'}>
+                        {msg}
+                    </Alert>
+                )}
             </Row>
 
             <Row className="w-100 w-md-50 justify-content-md-center">
@@ -129,17 +131,16 @@ export function CreateGroup() {
                             />
                         </Form.Group>
 
+                        {image && (
+                            <div className="imagePreview">
+                                <img src={image} alt="Selected" className="selectedImage" />
+                            </div>
+                        )}
+
                         <Form.Group className="formGroup" controlId="formFriends">
                             <Form.Label className="formLabel">Amigos:</Form.Label>
-                            {userData && userData.friends.map(friend => (
-                                <Form.Check
-                                    key={friend}
-                                    type="checkbox"
-                                    id={`friend-${friend}`}
-                                    label={friend}
-                                    value={friend}
-                                    onChange={() => handleFriendChange(friend)}
-                                />
+                            {userData && userData.friends.map(friendId => (
+                                <FriendCheck key={friendId} friendId={friendId} handleFriendChange={handleFriendChange}></FriendCheck>
                             ))}
                         </Form.Group>
 

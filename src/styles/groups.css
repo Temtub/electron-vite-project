@@ -1,3 +1,83 @@
-.groupCard{
-    
+
+.groupCard__imgCont{
+    width: 100%;
+    max-height: 200px;
+    overflow: hidden;
+    border-radius: 3px;
+}
+.groupCard__img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+.groupCard__button {
+    width: 100%;
+    margin-top: 10px;
+    border: 1px solid black !important;
+    color: black !important;
+}
+
+
+/* -------- CREATE GROUPS FORM ---------- */
+.loginCard {
+    padding: 20px;
+    margin: 0 auto;
+}
+
+.loginSide {
+    text-align: center;
+    padding: 20px;
+}
+
+.formGroup {
+    margin-bottom: 1rem;
+}
+
+.formInput {
+    width: 100%;
+}
+
+.imagePreview {
+    margin: 20px 0;
+    text-align: center;
+}
+
+.selectedImage {
+    max-width: 100%;
+    height: auto;
+    border: 1px solid #ddd;
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.buttonGroup {
+    margin-top: 20px;
+}
+
+@media (max-width: 767px) {
+    .buttonGroup {
+        margin-top: 10px;
+    }
+
+    .btnLogin {
+        width: 100%;
+    }
+}
+
+
+@media (min-width: 576px) {
+    .groupCard__img {
+        width: 50%;
+    }
+}
+
+@media (min-width: 768px) {
+    .loginSide {
+        text-align: left;
+        padding: 0;
+    }
+    .groupCard__img {
+        width: 25%;
+    }
 }

@@ -35,9 +35,9 @@ export function GroupList({ groups }) {
     const filteredGroups = Array.isArray(groups) ? groups.filter(group => !group.chat.users.includes(userId)) : [];
 
     return (
-        <Container>
+        <Container className="w-100">
             <h3>Lista de grupos</h3>
-            <Row>
+            <Row className="d-flex flex-row flex-wrap align-items-center justify-content-center">
                 {filteredGroups.map(group => (
                     <Col key={group._id} xs={12} md={6} lg={4}>
                         <GroupCard group={group} />

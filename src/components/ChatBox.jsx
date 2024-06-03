@@ -7,29 +7,28 @@ import { useEffect, useState } from "react";
 function ChatBox({ id, chatName, friends = [], users, icon }) {
 
     const userData = useCheckSession();
-    const [name, setName] = useState("")
+    const [name, setName] = useState("");
 
     useEffect(() => {
         const getName = async () => {
             if (!userData) {
-                return
+                return;
             }
-            let response
-           
+            let response;
+
             if (users.length > 2) {
-                setName(chatName)
-            }
-            else if (userData.data.id === users[0]) {
-                response = await restful("GET", `http://localhost:3001/api/user/${users[1]}`)
-                setName(response.name)
+                setName(chatName);
+            } else if (userData.data.id === users[0]) {
+                response = await restful("GET", `http://localhost:3001/api/user/${users[1]}`);
+                setName(response.name);
             } else {
-                response = await restful("GET", `http://localhost:3001/api/user/${users[0]}`)
-                setName(response.name)
+                response = await restful("GET", `http://localhost:3001/api/user/${users[0]}`);
+                setName(response.name);
             }
         }
 
-        getName()
-    }, [userData])
+        getName();
+    }, [userData]);
 
     return (
         <Link to={"/chat/" + id} className="chatBox d-flex flex-row align-items-center">

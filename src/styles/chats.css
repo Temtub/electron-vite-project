@@ -4,6 +4,7 @@
     flex-direction: row;
     justify-content: space-between;
     width: 100%;
+    padding-left: 60px !important;
 }
 
 .chat {
@@ -110,7 +111,7 @@
 .chat-sidebar {
     overflow-x: hidden;
     overflow-y: scroll;
-    
+    padding-left: 15px;
 }
 
 .chat-sidebar::-webkit-scrollbar {
@@ -129,6 +130,7 @@
 
 .chatBox {
     padding: 15px;
+    padding-left: 0;
     border-radius: 3px;
     
 }
@@ -150,7 +152,7 @@
     width: 40px;
     height: 40px;
     border-radius: 40px;
-    margin-left: 10px;
+    /* margin-left: 10px; */
     margin-right: 10px;
 }
 

@@ -3,6 +3,8 @@
     width: 55PX;
     background-color: #222224 !important;
     padding: 0 !important;
+    position: fixed !important;
+    z-index: 20;
 }
 .nabarButtons{
     height: 20% !important;

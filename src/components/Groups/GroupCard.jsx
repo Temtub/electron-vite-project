@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import { restful } from "/restApi/index.js"
 import { useCheckSession } from "../../services/hooks/useCheckSession"
 import { useNavigate } from 'react-router';
+import { Button } from 'react-bootstrap';
 
 export function GroupCard({ group }) {
 
@@ -14,19 +15,22 @@ export function GroupCard({ group }) {
     const joinGroup = async (event) => {
         const chatId = event.currentTarget.id
         const userId = userData.data.id
-        
+
         let response = await restful("POST", `http://localhost:3001/api/chat/addUserToChat`, { userId, chatId })
-        navigate("/chat/"+response.data.chat._id)
+        navigate("/chat/" + response.data.chat._id)
     }
 
     return (
-        <Card className="mb-3" >
+        <Card className="mb-3 w-100 w-md-50 w-lg-25">
             <Card.Body>
+                <div className='groupCard__imgCont'>
+                    <Card.Img className='groupCard__img' src={group.chat.icon} alt={`${group.chat.name} icon`} />
+                </div>
                 <Card.Title>{group.chat.name}</Card.Title>
                 <Card.Text>
                     NºUsuarios: {group.totalParticipants}
                 </Card.Text>
-                <button id={group._id} onClick={joinGroup}>Unirse</button>
+                <Button className='groupCard__button' id={group._id} onClick={joinGroup}>Unirse</Button>
             </Card.Body>
         </Card>
     );
