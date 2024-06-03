@@ -14,6 +14,7 @@ export function CreateGroup() {
     const token = useCheckSession();
     const [userData, setUserData] = useState(null);
     const [selectedFriends, setSelectedFriends] = useState([]);
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -39,6 +40,7 @@ export function CreateGroup() {
         } else if (selectedFriends.length < 2) {
             setMsg('Crea un grupo con al menos tres amigos');
         } else {
+            setIsSubmitting(true);
             const users = [...selectedFriends, userData._id];
             const data = {
                 users,
@@ -46,12 +48,19 @@ export function CreateGroup() {
                 icon: image
             };
 
-            // Enviar datos al backend para crear el grupo
-            let response = await restful("POST", "http://localhost:3001/api/chat/createGroup", data);
-            if (!response.status) {
-                setError(response.msg);
-            } else {
-                navigate("/chat/"+response._id);
+            try {
+                //  SEend to bd
+                let response = await restful("POST", "http://localhost:3001/api/chat/createGroup", data);
+                console.log(response);
+                if (typeof response.status !== 'undefined' && !response.status) {
+                    setError(response.msg);
+                } else {
+                    navigate("/chat/" + response._id);
+                }
+            } catch (error) {
+                setError('Error al crear el grupo. Inténtalo de nuevo más tarde.');
+            } finally {
+                setIsSubmitting(false);
             }
         }
     };
@@ -69,11 +78,17 @@ export function CreateGroup() {
         }
     };
 
+    /**
+     * Function to handle changes in the selection of friends
+     * @param {*} friendId 
+     */
     const handleFriendChange = (friendId) => {
+        // Update the state of selected friends 
         setSelectedFriends((prevSelectedFriends) =>
+            // If the friendId is already in the list, remove it if not, add it to the list
             prevSelectedFriends.includes(friendId)
-                ? prevSelectedFriends.filter(id => id !== friendId)
-                : [...prevSelectedFriends, friendId]
+                ? prevSelectedFriends.filter(id => id !== friendId) 
+                : [...prevSelectedFriends, friendId] 
         );
     };
 
@@ -131,7 +146,13 @@ export function CreateGroup() {
                         {error && <ShowMessage msg={error} />}
 
                         <div className="buttonGroup d-flex flex-column-reverse flex-md-row justify-content-between">
-                            <Button variant="primary" type="submit" className="btn btnLogin mb-2" id="send">
+                            <Button 
+                                variant="primary" 
+                                type="submit" 
+                                className="btn btnLogin mb-2" 
+                                id="send" 
+                                disabled={isSubmitting}
+                            >
                                 Crear el grupo
                             </Button>
                         </div>

@@ -11,10 +11,11 @@ function Register() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [emptyValue, setEmptyValue] = useState(false)
-    const [diffPassword, setDiffPassword] = useState(false)
+    const [emptyValue, setEmptyValue] = useState(false);
+    const [diffPassword, setDiffPassword] = useState(false);
     const [mensaje, setMensaje] = useState('');
-    const [error, setError] = useState("")
+    const [error, setError] = useState('');
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
 
     const handleSubmit = async (event) => {
@@ -25,21 +26,27 @@ function Register() {
         } else if (password !== confirmPassword) {
             setMensaje('Las passwords no coinciden.');
         } else {
+            setIsSubmitting(true); 
             const data = {
                 user: nombre,
                 pass: password,
                 email: email
-            }
-            let response = await restful("POST", "http://localhost:3001/api/register", data)
-            if(!response.status){
-                setError(response.msg)
-            }else{
-                
-                navigate("/preferences/"+response.data._id)
+            };
+            try {
+                let response = await restful("POST", "http://localhost:3001/api/register", data);
+                if (!response.status) {
+                    setError(response.msg);
+                } else {
+                    navigate("/preferences/" + response.data._id);
+                }
+            } catch (error) {
+                setError('Error al registrarse. Inténtalo de nuevo más tarde.');
+            } finally {
+                setIsSubmitting(false);
             }
         }
-
     };
+
     return (
         <Container className="loginCard d-flex flex-column flex-md-row">
             <Row className="formText w-75 justify-content-md-center align-items-start">
@@ -47,7 +54,7 @@ function Register() {
                     <h1>Regístrate</h1>
                 </Col>
             </Row>
-            
+
             <Row className="formRegister w-100 justify-content-md-center">
                 <Col xs={12} md={12}>
                     <Form onSubmit={handleSubmit}>
@@ -107,7 +114,13 @@ function Register() {
                             <Link to="/" className="btn mb-2 ">
                                 Iniciar sesión
                             </Link>
-                            <Button variant="primary" type="submit" className="btn btnLogin mb-2" id="send">
+                            <Button
+                                variant="primary"
+                                type="submit"
+                                className="btn btnLogin mb-2"
+                                id="send"
+                                disabled={isSubmitting}
+                            >
                                 Registrarse
                             </Button>
                         </div>
@@ -116,8 +129,6 @@ function Register() {
             </Row>
         </Container>
     );
-};
+}
 
-
-
-export default Register
+export default Register;

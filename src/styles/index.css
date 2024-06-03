@@ -50,11 +50,22 @@ body {
   overflow: visible;
 }
 
+.flyingMesage{
+  background-color: #262627;
+  border: 1px solid white;
+  position: absolute;
+  bottom: 10;
+  right: 10;
+  width: 200px;
+  height: 100px;
+}
 /* ------ ESPECIAL COLORS ----- */
 .redError {
   color: #D93025;
 }
-
+.neutral{
+  color: white;
+}
 .colorBlack {
   color: black;
 }

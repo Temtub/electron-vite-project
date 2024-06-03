@@ -4,6 +4,7 @@ import Message from "Components/Message";
 import { getUserDataByToken } from '../services/getUserDataByToken';
 import { restful } from "/restApi/index.js"
 import { Container, Row, Col, Button } from 'react-bootstrap';
+import { FlyingMessage } from './specialMessages/FlyingMessage';
 
 function Chat() {
   const userToken = localStorage.getItem("token");
@@ -13,14 +14,29 @@ function Chat() {
   const [inputText, setInputText] = useState('');
   const [chatHistory, setChatHistory] = useState([]);
   const [userIdState, setUserIdState] = useState("");
-  const [userDataState, setUserDataState] = useState({});
+  const [userFriends, setUserFriends] = useState([]);
   const [chatData, setChatData] = useState({});
   const [friendName, setFriendName] = useState("");
+  const [friendId, setFriendId] = useState("")
+  const [addedFriend, setAddedFriend ] = useState("")
+
+  const addFriend = async (event) => {
+    let response = await restful("POST", `http://localhost:3001/api/user/addFriendToUser`, { friendId, userId:userIdState})
+    
+    if(response.status){
+      setAddedFriend("Amigo agregado correctamente.")
+    }
+    else{
+      setAddedFriend(response.msg)
+    }
+  }
 
   useEffect(() => {
     const initializeChat = async () => {
+      setAddedFriend("")
       try {
         const userdata = await getUserDataByToken(userToken);
+        console.log(userdata)
         if (!userdata.status) {
           console.log("Reenviado");
           return navigate('/Se ha cerrado sesión automaticamente');
@@ -28,7 +44,8 @@ function Chat() {
 
         const userId = userdata.data.data.id;
         setUserIdState(userId);
-        setUserDataState(userdata);
+        // console.log(userdata.data.data.friends)
+        setUserFriends(userdata.data.data.friends);
 
         const chatResponse = await restful("GET", `http://localhost:3001/api/chat/getChat/${idChatParam}`);
         setChatData(chatResponse);
@@ -37,6 +54,7 @@ function Chat() {
         const friendId = chatResponse.data.users.find(id => id !== userId);
         const friendResponse = await restful("GET", `http://localhost:3001/api/user/${friendId}`);
         setFriendName(friendResponse.name);
+        setFriendId(friendResponse._id)
       } catch (error) {
         console.error("Error initializing chat:", error);
       }
@@ -50,6 +68,7 @@ function Chat() {
   }, [chatHistory]);
 
   const scrollToBottom = () => {
+    // ? Operator is to check if this is correct before doing the operation to save from any error
     chatHistoryRef.current?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -71,7 +90,7 @@ function Chat() {
       try {
         const response = await restful("POST", "http://localhost:3001/api/chat/newMessage", data);
         const newMessage = {
-          _id: response._id, 
+          _id: response._id,
           sender: userIdState,
           content: inputText,
           time: instantMoment
@@ -79,7 +98,7 @@ function Chat() {
         setChatHistory(prevChatHistory => [...prevChatHistory, newMessage]);
         setInputText('');
       } catch (error) {
-        console .error("Error sending message:", error);
+        console.error("Error sending message:", error);
       }
     }
   };
@@ -87,6 +106,8 @@ function Chat() {
   const handleBackToChats = () => {
     navigate("/chat");
   };
+
+  // console.log(userFriends)
 
   return (
     <div className='chat'>
@@ -103,6 +124,10 @@ function Chat() {
               : null
           }
         </div>
+
+          { 
+            userFriends && !userFriends.includes(friendId) && <button onClick={addFriend}><i className="fa-solid fa-user-plus"></i></button>
+          }
       </div>
 
       <div className="chat__history">
@@ -130,6 +155,8 @@ function Chat() {
           <i className="fa-solid fa-paper-plane"></i>
         </button>
       </form>
+
+      { addedFriend && <FlyingMessage msg={addedFriend} ></FlyingMessage> }
     </div>
   );
 };

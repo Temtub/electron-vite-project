@@ -6,21 +6,6 @@
     width: 100%;
 }
 
-
-.chat-sidebar::-webkit-scrollbar {
-    width: 8px;
-}
-
-.chat-sidebar::-webkit-scrollbar-track {
-    background: rgba(255, 166, 0, 0);
-}
-
-.chat-sidebar::-webkit-scrollbar-thumb {
-    background-color: rgb(61, 61, 61);
-    border-radius: 20px;
-    border: 3px solid rgba(255, 166, 0, 0);
-}
-
 .chat {
     border: 1px solid #f9f9f9;
     border-radius: 3px;
@@ -110,7 +95,6 @@
 
     width: fit-content;
     overflow-wrap: break-word;
-
     align-self: flex-start;
     text-align: left;
 }
@@ -123,16 +107,37 @@
 
 /* END Messages part  */
 
+.chat-sidebar {
+    overflow-x: hidden;
+    overflow-y: scroll;
+    
+}
+
+.chat-sidebar::-webkit-scrollbar {
+    width: 8px;
+}
+
+.chat-sidebar::-webkit-scrollbar-track {
+    background: rgba(255, 166, 0, 0);
+}
+
+.chat-sidebar::-webkit-scrollbar-thumb {
+    background-color: rgb(61, 61, 61);
+    border-radius: 20px;
+    border: 3px solid rgba(255, 166, 0, 0);
+}
 
 .chatBox {
     padding: 15px;
     border-radius: 3px;
+    
 }
 
 .chatBox__link {
     display: flex;
     flex-grow: 1;
     overflow: hidden;
+
 }
 
 .chatBox__title {

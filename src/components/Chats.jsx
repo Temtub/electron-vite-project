@@ -32,9 +32,7 @@ function Chats({ data }) {
 
         fetchData();
     }, [data]);
-    
-    console.log(chatsData)
-    console.log(userData)
+
     return (
         <aside className="chats">
 

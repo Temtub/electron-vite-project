@@ -9,26 +9,14 @@ function ChatBox({ id, chatName, friends = [], users, icon }) {
     const userData = useCheckSession();
     const [name, setName] = useState("")
 
-    const addFriend = async (event) => {
-        let idFriend
-        let idUser = userData.data.id
-
-        if (event.target.nodeName == 'I') {
-            idFriend = event.target.parentElement.id
-        } else {
-            idFriend = event.target.id
-        }
-        let response = await restful("POST", `http://localhost:3001/api/user/addFriendToUser`, { friendId: idFriend, userId: idUser })
-    }
-
-
     useEffect(() => {
         const getName = async () => {
             if (!userData) {
                 return
             }
             let response
-            if (friends.length <= 2) {
+           
+            if (users.length > 2) {
                 setName(chatName)
             }
             else if (userData.data.id === users[0]) {
@@ -38,7 +26,6 @@ function ChatBox({ id, chatName, friends = [], users, icon }) {
                 response = await restful("GET", `http://localhost:3001/api/user/${users[0]}`)
                 setName(response.name)
             }
-            console.log(name)
         }
 
         getName()

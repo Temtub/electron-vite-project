@@ -16,6 +16,14 @@ function Login() {
     const [error, setError] = useState("")
     const { msg } = useParams()
 
+    useEffect(() => {
+        const token = localStorage.getItem('token');
+        if (token) {
+            navigate('/chat');
+        }
+    }, [navigate]);
+
+
     const formManagement = async (e) => {
         e.preventDefault()
 
@@ -30,7 +38,7 @@ function Login() {
         // Check that the user exists
         try {
             response = await restful("POST", "http://localhost:3001/api/login", data)
-
+            console.log(response)
         } catch (err) {
             setError("Ha ocurrido un error, pruebe más tarde.")
         }
@@ -39,19 +47,12 @@ function Login() {
         if (response.status) {
             // Save the token in the local storage
             localStorage.setItem('token', response.token)
-            setCorrectLogin(true)
+            navigate('/chat');
         }
         else {
             setError(response.msg)
         }
     }
-
-    // Check correct login
-    useEffect(() => {
-        if (correctLogin) {
-            navigate('/chat');
-        }
-    }, [correctLogin]);
 
     return (
         <Container className="loginCard d-flex flex-column flex-md-row">
