@@ -54,11 +54,16 @@ body {
 .flyingMesage{
   background-color: #262627;
   border: 1px solid white;
+  padding: 10px;
+
   position: absolute;
-  bottom: 10;
-  right: 10;
-  width: 200px;
-  height: 100px;
+  bottom: 10px;
+  right: 10px;
+  padding: 20px 25px 15px 10px;
+
+}
+
+.flyingMesage__text{
 }
 /* ------ ESPECIAL COLORS ----- */
 .redError {

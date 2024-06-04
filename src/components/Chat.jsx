@@ -4,7 +4,7 @@ import Message from "Components/Message";
 import { getUserDataByToken } from '../services/getUserDataByToken';
 import { restful } from "/restApi/index.js"
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import { FlyingMessage } from './specialMessages/FlyingMessage';
+import { useErrorContext } from './Context/ErrorContext';
 
 function Chat() {
   const userToken = localStorage.getItem("token");
@@ -18,16 +18,26 @@ function Chat() {
   const [chatData, setChatData] = useState({});
   const [friendName, setFriendName] = useState("");
   const [friendId, setFriendId] = useState("")
-  const [addedFriend, setAddedFriend ] = useState("")
+  const [addedFriend, setAddedFriend] = useState("")
+  const lastWriter = useRef(null);
+  const { setError } = useErrorContext();
+
+  /**
+   * Function to change who is the writer
+   * @param {*} newLastWriter 
+   */
+  const changeLastWriter = (newLastWriter) => {
+    lastWriter.current = newLastWriter;
+  }
 
   const addFriend = async (event) => {
-    let response = await restful("POST", `http://localhost:3001/api/user/addFriendToUser`, { friendId, userId:userIdState})
-    
-    if(response.status){
-      setAddedFriend("Amigo agregado correctamente.")
+    let response = await restful("POST", `http://localhost:3001/api/user/addFriendToUser`, { friendId, userId: userIdState })
+
+    if (response.status) {
+      setError("Amigo agregado correctamente.")
     }
-    else{
-      setAddedFriend(response.msg)
+    else {
+      setError(response.msg)
     }
   }
 
@@ -119,15 +129,15 @@ function Chat() {
           {
             chatData && chatData.data && chatData.data.users
               ? (chatData.data.users.length === 2
-                ? <h2 className='ms-3'>{friendName}</h2>
-                : <h2 className='ms-3'>{chatData.data.name}</h2>)
+                ? <h2 className='ms-3 chat__name'>{friendName}</h2>
+                : <h2 className='ms-3 chat__name'>{chatData.data.name}</h2>)
               : null
           }
         </div>
 
-          { 
-            userFriends && !userFriends.includes(friendId) && <button onClick={addFriend}><i className="fa-solid fa-user-plus"></i></button>
-          }
+        {
+          userFriends && !userFriends.includes(friendId) && <button onClick={addFriend}><i className="fa-solid fa-user-plus"></i></button>
+        }
       </div>
 
       <div className="chat__history">
@@ -137,9 +147,12 @@ function Chat() {
             actualUser={userIdState}
             sender={message.sender}
             text={message.content}
+            isChat={message.users > 2 ? true : false} 
+            changeLastWriter={changeLastWriter}
+            lastWriter={lastWriter}
           />
         ))}
-        <div ref={chatHistoryRef} />
+        <div className='spacer' ref={chatHistoryRef} />
       </div>
 
       <form onSubmit={handleSubmit} className='chat__submit'>
@@ -156,7 +169,6 @@ function Chat() {
         </button>
       </form>
 
-      { addedFriend && <FlyingMessage msg={addedFriend} ></FlyingMessage> }
     </div>
   );
 };

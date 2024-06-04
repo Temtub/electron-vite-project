@@ -1,14 +1,16 @@
 import { Outlet } from 'react-router';
 import { useNavigate } from 'react-router-dom';
-
 import { useCheckSession } from '../services/hooks/useCheckSession';
 import { getNewChat } from '../services/getNewChat';
 import { Container, Row, Col, Button } from 'react-bootstrap';
-import ChargingChats from './ChargingChats';
-import Chats from './Chats';
 import { restful } from "/restApi"
 import { useEffect, useState } from 'react';
+import { useErrorContext } from './Context/ErrorContext';
+import ChargingChats from './ChargingChats';
+import Chats from './Chats';
+import { FlyingMessage } from './specialMessages/FlyingMessage';
 let token;
+
 function Messages() {
 
   const token = useCheckSession();
@@ -17,7 +19,8 @@ function Messages() {
   const [newChat, setNewChat] = useState([])
   const [showChatList, setShowChatList] = useState(true);
   const [showChat, setShowChat] = useState(true);
-  
+  const { error } = useErrorContext();
+
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -64,25 +67,32 @@ function Messages() {
     <Container fluid className='messages'>
       <Row className={`chat-sidebar ${showChatList ? 'd-block' : 'd-none'}`}>
         <Col className="ps-1 d-flex flex-column align-items-start">
-          <h2>Chats</h2>
-          <Button
-            title='Añade un nuevo chat'
-            className='searchChatButton'
-            disabled={loading}
-            onClick={searchNewChat}
-          >
-            {loading ? 'Buscando...' : <i className="fa-solid fa-plus"></i>}
-          </Button>
+        {/* "navbar" of the side part */}
+          <div className='ps-2'>
+
+            <h2>Chats</h2>
+            <Button
+              title='Añade un nuevo chat'
+              className='searchChatButton'
+              disabled={loading}
+              onClick={searchNewChat}
+            >
+              {loading ? 'Buscando...' : <i className="fa-solid fa-plus"></i>}
+            </Button>
+          </div>
+          {/* List of the chats */}
           {userData ? <Chats data={userData.chats} onChatClick={handleChatClick} /> : <ChargingChats />}
         </Col>
       </Row>
 
-      <Row className={`chat-content ${showChat ? 'd-block' : 'd-none'}`}>
+      <Row className={`chat__container ${showChat ? 'd-block' : 'd-none'}`}>
         <Col>
-          
+
           <Outlet />
         </Col>
       </Row>
+
+      {error && <FlyingMessage msg={error} ></FlyingMessage>}
 
     </Container>
   );

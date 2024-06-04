@@ -25,6 +25,7 @@ import styled, { createGlobalStyle } from 'styled-components';
 import { ThemeProvider } from './styles/ThemeContext';
 import { ViewGroups } from 'Components/Groups/ViewGroups';
 import { CreateGroup } from 'Components/Groups/CreateGroup';
+import { ErrorProvider } from 'Components/Context/ErrorContext';
 
 // const GlobalStyle = createGlobalStyle`
 //   body {
@@ -45,33 +46,38 @@ import { CreateGroup } from 'Components/Groups/CreateGroup';
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider>
-      {/* The router */}
-      <Router>
-        <Routes>
-          {/* Login */}
-          <Route index path='/' element={<Login />} />
-          <Route index path='/:msg' element={<Login />} />
+      {/* Error provider to pass the message of error between components */}
+      <ErrorProvider>
+        {/* The router */}
+        <Router>
+          <Routes>
+            {/* Login */}
+            <Route index path='/' element={<Login />} />
+            <Route index path='/:msg' element={<Login />} />
 
-          {/* Register */}
-          <Route path='/register' element={<Register />} />
-          <Route path='/preferences/:userId' element={<Preferences />} />
+            {/* Register */}
+            <Route path='/register' element={<Register />} />
+            <Route path='/preferences/:userId' element={<Preferences />} />
 
-          {/* Main route of the page that will contain the navbar */}
-          <Route path="/" element={<Layout />}>
-            {/* Main route for the chat */}
-            <Route path="/chat" element={<Messages />}>
-              {/* The message that will show if there's no chat selected */}
-              <Route index element={<DefaultChatBox />} />
 
-              {/* Chats of the specific user */}
-              <Route path=":idChatParam" element={<Chat />} />
+            {/* Main route of the page that will contain the navbar */}
+            <Route path="/" element={<Layout />}>
+              {/* Main route for the chat */}
+              <Route path="/chat" element={<Messages />}>
+                {/* The message that will show if there's no chat selected */}
+                <Route index element={<DefaultChatBox />} />
 
+                {/* Chats of the specific user */}
+                <Route path=":idChatParam" element={<Chat />} />
+
+              </Route>
+              <Route path="/group" element={<ViewGroups />} />
+              <Route path="/createGroup" element={<CreateGroup />} />
             </Route>
-            <Route path="/group" element={<ViewGroups />} />
-            <Route path="/createGroup" element={<CreateGroup />} />
-          </Route>
-        </Routes>
-      </Router>
+
+          </Routes>
+        </Router>
+      </ErrorProvider>
     </ThemeProvider>
   </React.StrictMode>
 )
