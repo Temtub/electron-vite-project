@@ -1,6 +1,6 @@
 import { restful } from "/restApi/index.js";
 import personaImage from "../assets/images/persona.jpg";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { useCheckSession } from "../services/hooks/useCheckSession";
 import { useEffect, useState } from "react";
 
@@ -8,6 +8,8 @@ function ChatBox({ id, chatName, friends = [], users, icon }) {
 
     const userData = useCheckSession();
     const [name, setName] = useState("");
+
+    const { idChatParam } = useParams()
 
     useEffect(() => {
         const getName = async () => {
@@ -31,7 +33,7 @@ function ChatBox({ id, chatName, friends = [], users, icon }) {
     }, [userData]);
 
     return (
-        <Link to={"/chat/" + id} className="chatBox d-flex flex-row align-items-center">
+        <Link to={"/chat/" + id} className={`${(idChatParam && idChatParam === id && "marked") } chatBox d-flex flex-row align-items-center`}>
             {icon ? (
                 <img className="chatBox__Img" src={icon} alt="Icono de grupo" />
             ) : (

@@ -34,7 +34,7 @@ function Chats({ data }) {
     }, [data]);
 
     return (
-        <aside className="chats mt-3">
+        <aside className="chats mt-3 h-100">
 
                 {/* If theres no data it shows it, if theres no also and if alls correct dont show it */}
                 {error ? (
@@ -43,7 +43,7 @@ function Chats({ data }) {
                     chatsData.length === 0 ? (
                         <div>Empty</div>
                     ) : (
-                        chatsData.map(chat => <ChatBox key={chat._id} chatName={chat.name} users={chat.users} id={chat._id} friends={userData.data.friends} icon={chat.icon}/>)
+                        chatsData.map(chat => <ChatBox key={chat._id} chatName={chat.name} users={chat.users} id={chat._id} friends={userData.data.friends} icon={chat.icon} />)
                     )
                 )}
             

@@ -32,7 +32,7 @@ function Login() {
             return
         }
         const data = {
-            user: user,
+            user: user.trim(),
             pass: pass
         }
         // Check that the user exists

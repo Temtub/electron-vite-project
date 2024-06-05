@@ -1,10 +1,14 @@
+.viewGroups {
+    margin-left: 65px;
+}
 
-.groupCard__imgCont{
+.groupCard__imgCont {
     width: 100%;
     max-height: 200px;
     overflow: hidden;
     border-radius: 3px;
 }
+
 .groupCard__img {
     width: 100%;
     height: auto;
@@ -77,6 +81,7 @@
         text-align: left;
         padding: 0;
     }
+
     .groupCard__img {
         width: 25%;
     }

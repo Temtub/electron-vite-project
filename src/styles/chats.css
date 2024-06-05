@@ -8,11 +8,11 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    /* overflow: hidden; */
+
     width: 100%;
-    padding-left: 60px !important;
-    display: flex;
     height: 100vh;
-    overflow: hidden;
+    padding-left: 60px !important;
 }
 
 .chat-sidebar {
@@ -22,8 +22,11 @@
     max-width: 25vw;
     overflow-y: auto;
     flex-shrink: 0;
+    background-color: #212122;
 }
-
+.chat-sidebar__col{
+    padding: 0;
+}
 .chat-sidebar::-webkit-scrollbar {
     width: 8px;
 }
@@ -38,6 +41,10 @@
     border: 3px solid rgba(255, 166, 0, 0);
 }
 
+.chats{
+    width: 100%;
+}
+
 .chatBox {
     padding: 15px;
     padding-left: 0;
@@ -45,7 +52,9 @@
     text-decoration: none;
     color: white;
     text-transform: capitalize;
+    width: 100%;
 }
+
 
 .chatBox__link {
     display: flex;
@@ -69,9 +78,11 @@
 }
 
 .chatBox:hover {
-    background-color: #212122;
+    background-color: #2a2a2c;
 }
-
+.marked {
+    background-color: #2a2a2c;
+}
 .serchChatButton {
     width: 100%;
     height: 50px;
@@ -96,9 +107,9 @@
     flex-grow: 1;
     display: none;
     
-    margin-top: 5vh;
+    margin-top: 2.5vh;
     
-    height: 90vh;
+    height: 95vh;
     max-width: 70vw;
     width: auto;
     padding: 20px;
@@ -111,7 +122,7 @@
     box-shadow: #2135473f 1px 1px 10px 10px inset;
     padding: 20px;
 
-    height: 100ch;
+    height: 95vh;
     padding-bottom: 5px;
 
     display: flex;
@@ -120,6 +131,7 @@
 }
 .chat__name{
     text-transform: capitalize;
+    margin-bottom: 0;
 }
 .chat__history {
     overflow-y: scroll;
@@ -245,14 +257,18 @@
 
 .addFriendButton {
 
-    border: 1px solid black;
-    background-color: #0A58CA;
+    border: 1px solid rgb(255, 255, 255);
+    color: white;
+    background-color: #184ea000;
     border-radius: 5px;
-
+    width: 35px;
+    height: 35px;
 }
 
 .addFriendButton:hover {
-    background-color: #0066ff;
+    /* background-color: #f3f3f3; */
+    color: rgb(197, 189, 189);
+
 }
 
 

@@ -82,7 +82,7 @@ function Register() {
                         </Form.Group>
 
                         <Row className="d-flex flex-column flex-md-row">
-                            <Col xs={12} md={6}>
+                            <Col xs={12} md={12} xxl={6}>
                                 <Form.Group className="formGroup" controlId="formBasicPassword">
                                     <Form.Label className="formLabel">Contraseña:</Form.Label>
                                     <Form.Control
@@ -95,7 +95,7 @@ function Register() {
                                 </Form.Group>
                             </Col>
 
-                            <Col xs={12} md={6}>
+                            <Col xs={12} md={12} xxl={6}>
                                 <Form.Group className="formGroup" controlId="formBasicConfirmPassword">
                                     <Form.Label className="formLabel">Repite la contraseña:</Form.Label>
                                     <Form.Control

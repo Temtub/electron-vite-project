@@ -36,7 +36,7 @@ export function ViewGroups() {
 
     return (
 
-        <div className="w-100">
+        <div className="w-100 viewGroups">
 
             <h1>Grupos</h1>
         
