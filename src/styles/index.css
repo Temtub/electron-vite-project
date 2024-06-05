@@ -27,11 +27,6 @@ body {
   display: flow-root;
 }
 
-.layout{
-  max-width: 2100px;
-  margin: auto;
-  max-height: 1200px;
-}
 /* ----------- FONT AWESOME STYLES ------- */
 
 .fa-info {
@@ -56,7 +51,7 @@ body {
   overflow: visible;
 }
 
-.flyingMessage{
+.flyingMesage{
   background-color: #262627;
   border: 1px solid white;
   padding: 10px;
@@ -65,14 +60,10 @@ body {
   bottom: 10px;
   right: 10px;
   padding: 20px 25px 15px 10px;
-  border-radius: 3px;
+
 }
-.flyingMessage__close{
-  position: absolute;
-  top: 8px;
-  right: 8px;
-}
-.flyingMessage__text{
+
+.flyingMesage__text{
 }
 /* ------ ESPECIAL COLORS ----- */
 .redError {
@@ -85,9 +76,6 @@ body {
   color: black;
 }
 
-.d-none{
-  display: none;
-}
 @media (min-width: 767.98px) {
   .alert {
     width: 80% !important;

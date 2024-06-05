@@ -129,9 +129,9 @@ function Chat() {
 
   return (
     <div className='chat'>
-      <div className='d-flex flex-row justify-content-between align-items-center pb-3'>
+      <div className='d-flex flex-row justify-content-between'>
         <div className='d-flex flex-row'>
-          <Button className="" onClick={handleBackToChats}>
+          <Button className="mb-2" onClick={handleBackToChats}>
             Volver a Chats
           </Button>
           {
@@ -144,7 +144,7 @@ function Chat() {
         </div>
 
         {
-          chatData && chatData.data && chatData.data.users && chatData.data.users.length < 3 && userFriends && !userFriends.includes(friendId) && <button className='addFriendButton' onClick={addFriend}><i className="fa-solid fa-user-plus"></i></button>
+          userFriends && !userFriends.includes(friendId) && <button onClick={addFriend}><i className="fa-solid fa-user-plus"></i></button>
         }
       </div>
 

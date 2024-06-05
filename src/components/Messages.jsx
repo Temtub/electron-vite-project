@@ -66,7 +66,7 @@ function Messages() {
   return (
     <Container fluid className='messages'>
       <Row className={`chat-sidebar ${showChatList ? 'd-block' : 'd-none'}`}>
-        <Col className="chat-sidebar__col d-flex flex-column align-items-start">
+        <Col className="ps-1 d-flex flex-column align-items-start">
         {/* "navbar" of the side part */}
           <div className='ps-2'>
 
@@ -85,9 +85,8 @@ function Messages() {
         </Col>
       </Row>
 
-      {/* ${showChat ? 'd-block' : 'd-none'} */}
-      <Row className={`chat__container `}>
-        <Col className=''>
+      <Row className={`chat__container ${showChat ? 'd-block' : 'd-none'}`}>
+        <Col>
 
           <Outlet />
         </Col>
