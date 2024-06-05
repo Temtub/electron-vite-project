@@ -5,6 +5,7 @@ import { getUserDataByToken } from '../services/getUserDataByToken';
 import { restful } from "/restApi/index.js"
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { useErrorContext } from './Context/ErrorContext';
+// import { useXmpp } from './Context/XmppContext';
 
 function Chat() {
   const userToken = localStorage.getItem("token");
@@ -21,6 +22,7 @@ function Chat() {
   const [addedFriend, setAddedFriend] = useState("")
   const lastWriter = useRef(null);
   const { setError } = useErrorContext();
+  const  {sendMessage, messages} = useXmpp()
 
   /**
    * Function to change who is the writer
@@ -99,12 +101,18 @@ function Chat() {
 
       try {
         const response = await restful("POST", "http://localhost:3001/api/chat/newMessage", data);
+        console.log(response)
         const newMessage = {
           _id: response._id,
           sender: userIdState,
           content: inputText,
-          time: instantMoment
+          time: instantMoment,
         };
+
+        // // Send the message thru ejabberd
+        // response.users.map(user=>{sendMessage(`${recipient}@localhost`, jsonContent)})
+      
+
         setChatHistory(prevChatHistory => [...prevChatHistory, newMessage]);
         setInputText('');
       } catch (error) {

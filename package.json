@@ -18,6 +18,8 @@
     "react-dom": "^18.2.0",
     "react-router": "^6.22.3",
     "react-router-dom": "^6.23.1",
+    "simple-xmpp": "^2.3.1",
+    "stanza": "^12.20.0",
     "stanza.io": "^10.3.4",
     "styled-components": "^6.1.11",
     "vite-tsconfig-paths": "^4.3.2"
