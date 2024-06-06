@@ -22,7 +22,7 @@ function Chat() {
   const [addedFriend, setAddedFriend] = useState("")
   const lastWriter = useRef(null);
   const { setError } = useErrorContext();
-  const  {sendMessage, messages} = useXmpp()
+  // const  {sendMessage, messages} = useXmpp()
 
   /**
    * Function to change who is the writer

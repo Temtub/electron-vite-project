@@ -27,6 +27,7 @@ import { ViewGroups } from 'Components/Groups/ViewGroups';
 import { CreateGroup } from 'Components/Groups/CreateGroup';
 import { ErrorProvider } from 'Components/Context/ErrorContext';
 // import { XmppProvider } from 'Components/Context/XmppContext';
+
 // const GlobalStyle = createGlobalStyle`
 //   body {
 //     background-color: ${(props) => props.theme.background};
@@ -48,6 +49,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <ThemeProvider>
       {/* Error provider to pass the message of error between components */}
         {/* <XmppProvider> */}
+        <ErrorProvider>
 
           {/* The router */}
           <Router>
@@ -79,6 +81,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
             </Routes>
           </Router>
         {/* </XmppProvider> */}
+        </ErrorProvider>
     </ThemeProvider>
   </React.StrictMode>
 )
