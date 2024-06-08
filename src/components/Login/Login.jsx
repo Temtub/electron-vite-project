@@ -26,7 +26,7 @@ function Login() {
 
     const formManagement = async (e) => {
         e.preventDefault()
-
+        console.log("AQUI")
         if (!user || !pass) {
             setError("Rellene todos los datos")
             return
@@ -46,7 +46,11 @@ function Login() {
         // if all went correct makes the login
         if (response.status) {
             // Save the token in the local storage
-            localStorage.setItem('token', response.token)
+            console.log(response.data)
+            localStorage.setItem('token', response.data.token)
+
+            console.log(await window.ipcRenderer.callXmppConnect(user, response.data.password))
+            
             navigate('/chat');
         }
         else {

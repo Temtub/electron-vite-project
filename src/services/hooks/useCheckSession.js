@@ -9,7 +9,7 @@ export const useCheckSession = () => {
 
   useEffect(() => {
     const token = localStorage.getItem('token');
-
+    // console.log(token)
     if (token) {
       const decodedToken = jwtDecode(token);
       const tokenExpirationTime = decodedToken.exp * 1000;

@@ -48,7 +48,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider>
       {/* Error provider to pass the message of error between components */}
-        {/* <XmppProvider> */}
+      {/* <XmppProvider> */}
         <ErrorProvider>
 
           {/* The router */}
@@ -80,9 +80,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 
             </Routes>
           </Router>
-        {/* </XmppProvider> */}
         </ErrorProvider>
+      {/* </XmppProvider> */}
     </ThemeProvider>
-  </React.StrictMode>
+  </React.StrictMode >
 )
 

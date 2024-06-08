@@ -111,7 +111,7 @@ function Chat() {
 
         // // Send the message thru ejabberd
         // response.users.map(user=>{sendMessage(`${recipient}@localhost`, jsonContent)})
-      
+
 
         setChatHistory(prevChatHistory => [...prevChatHistory, newMessage]);
         setInputText('');
@@ -155,7 +155,7 @@ function Chat() {
             actualUser={userIdState}
             sender={message.sender}
             text={message.content}
-            isChat={message.users > 2 ? true : false} 
+            isChat={message.users > 2 ? true : false}
             changeLastWriter={changeLastWriter}
             lastWriter={lastWriter}
           />

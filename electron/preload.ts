@@ -19,6 +19,8 @@ contextBridge.exposeInMainWorld('ipcRenderer', {
     return ipcRenderer.invoke(channel, ...omit)
   },
 
-  // You can expose other APTs you need here.
-  // ...
+  callXmppConnect( name:string, password:string){ return ipcRenderer.invoke("call-Xmpp-Connection", name, password)}
+
 })
+
+

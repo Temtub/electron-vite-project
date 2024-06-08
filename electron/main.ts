@@ -1,5 +1,6 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, ipcMain } from 'electron'
 import path from 'node:path'
+import * as XMPP from 'simple-xmpp';
 
 // The built directory structure
 //
@@ -23,8 +24,9 @@ function createWindow() {
     icon: path.join(process.env.VITE_PUBLIC, 'electron-vite.svg'),
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
+      contextIsolation: true
     },
-    closable : true
+    closable: true
 
   })
 
@@ -57,6 +59,24 @@ app.on('activate', () => {
   if (BrowserWindow.getAllWindows().length === 0) {
     createWindow()
   }
+})
+
+function createXmppSession(name: string, password: string) {
+  console.log("PORFAVOORRRR", name, password)
+  
+  XMPP.connect({
+    jid: `${name}@ip-172-31-18-153.eu-north-1.compute.internal`,
+    password: password,
+    host: "13.60.59.64",
+    port: 5222 // Puerto predeterminado para XMPP
+  });
+
+  XMPP.on("error", err => {
+    console.error(err);
+  });
+}
+ipcMain.handle("call-Xmpp-Connection", (event, name: string, password: string) => {
+  return createXmppSession(name, password);
 })
 
 app.whenReady().then(createWindow)
