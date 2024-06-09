@@ -1,5 +1,5 @@
-import React from 'react'
 import ReactDOM from 'react-dom/client'
+import React from 'react'
 
 //Import the class that we will need to Route the page
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';

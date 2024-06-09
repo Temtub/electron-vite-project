@@ -1,4 +1,6 @@
-
+.viewGroup{
+    padding-left: 70px;
+}
 .groupCard__imgCont{
     width: 100%;
     max-height: 200px;
@@ -59,7 +61,9 @@
     .buttonGroup {
         margin-top: 10px;
     }
-
+    .createGroup{
+        margin-left: 80px !important;
+    }
     .btnLogin {
         width: 100%;
     }

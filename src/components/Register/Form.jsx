@@ -13,7 +13,6 @@ function Register() {
     const [confirmPassword, setConfirmPassword] = useState('');
     const [emptyValue, setEmptyValue] = useState(false);
     const [diffPassword, setDiffPassword] = useState(false);
-    const [mensaje, setMensaje] = useState('');
     const [error, setError] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
@@ -22,9 +21,9 @@ function Register() {
         event.preventDefault();
 
         if (!nombre || !email || !password || !confirmPassword) {
-            setMensaje('Por favor, rellena todos los campos.');
+            setError('Por favor, rellena todos los campos.');
         } else if (password !== confirmPassword) {
-            setMensaje('Las passwords no coinciden.');
+            setError('Las passwords no coinciden.');
         } else {
             setIsSubmitting(true); 
             const data = {
@@ -34,7 +33,9 @@ function Register() {
             };
             try {
                 let response = await restful("POST", "http://localhost:3001/api/register", data);
+                console.log(response)
                 if (!response.status) {
+                    
                     setError(response.msg);
                 } else {
                     navigate("/preferences/" + response.data._id);

@@ -26,7 +26,6 @@ function Login() {
 
     const formManagement = async (e) => {
         e.preventDefault()
-        console.log("AQUI")
         if (!user || !pass) {
             setError("Rellene todos los datos")
             return
@@ -38,7 +37,6 @@ function Login() {
         // Check that the user exists
         try {
             response = await restful("POST", "http://localhost:3001/api/login", data)
-            console.log(response)
         } catch (err) {
             setError("Ha ocurrido un error, pruebe más tarde.")
         }
@@ -46,10 +44,9 @@ function Login() {
         // if all went correct makes the login
         if (response.status) {
             // Save the token in the local storage
-            console.log(response.data)
             localStorage.setItem('token', response.data.token)
 
-            console.log(await window.ipcRenderer.callXmppConnect(user, response.data.password))
+            await window.ipcRenderer.callXmppConnect(user, response.data.password)
             
             navigate('/chat');
         }

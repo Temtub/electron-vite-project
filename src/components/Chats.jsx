@@ -34,7 +34,7 @@ function Chats({ data }) {
     }, [data]);
 
     return (
-        <aside className="chats mt-3">
+        <aside className="chats w-100 mt-3">
 
                 {/* If theres no data it shows it, if theres no also and if alls correct dont show it */}
                 {error ? (

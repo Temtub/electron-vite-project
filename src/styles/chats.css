@@ -22,6 +22,7 @@
     max-width: 25vw;
     overflow-y: auto;
     flex-shrink: 0;
+    background-color: #282829;
 }
 
 .chat-sidebar::-webkit-scrollbar {
@@ -45,6 +46,7 @@
     text-decoration: none;
     color: white;
     text-transform: capitalize;
+    width: 100%;
 }
 
 .chatBox__link {
@@ -99,20 +101,23 @@
     margin-top: 5vh;
     
     height: 90vh;
+    max-height: 90vh;
     max-width: 70vw;
     width: auto;
     padding: 20px;
+    /* overflow: auto; */
     
 }
 .chat {
     border: 1px solid #f9f9f9;
-    overflow-y: auto;
+    /* overflow-y: auto; */
     border-radius: 3px;
     box-shadow: #2135473f 1px 1px 10px 10px inset;
     padding: 20px;
 
-    height: 100ch;
+    /* height: 100%; */
     padding-bottom: 5px;
+    max-height: 90vh;
 
     display: flex;
     flex-direction: column;
@@ -123,7 +128,7 @@
 }
 .chat__history {
     overflow-y: scroll;
-    height: 300px;
+    /* height: 300px; */
     width: 100%;
     overflow-y: auto;
     height: calc(100vh - 60px);

@@ -7,23 +7,24 @@
  * @returns 
  */
 export const restful = async (method, endpoint, data, headers = {}) => {
+    // OPtion of the petition
     const options = {
         method,
         headers: {
             'Content-Type': 'application/json',
-            // ... spreads the data
+            // ... spreads the data of an array or object
             ...headers
         },
         // Add data only when its not a GET fetch
         body: method !== 'GET' ? JSON.stringify(data) : undefined 
     };
-
+    // Return the data
     return fetch(endpoint, options)
         .then(response => {
             return response.json();
         })
         .catch(error => {
             console.log('Error:', error);
-            throw error; // Re-lanzar el error para que el llamador pueda manejarlo
+            throw error; 
         });
 };

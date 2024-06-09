@@ -4,12 +4,14 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import { getUserDataByToken } from "../../services/getUserDataByToken";
+import { useCheckSession } from "../../services/hooks/useCheckSession"
 
 export function GroupList({ groups }) {
 
     const userToken = localStorage.getItem("token");
     const [error, setError] = useState("")
     const [userId, setUserId] = useState("")
+    const checkSession = useCheckSession()
 
     useEffect(() => {
         const getUserData = async () => {

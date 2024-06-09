@@ -6,17 +6,23 @@ import { restful } from "/restApi/index.js"
 import { useCheckSession } from "../../services/hooks/useCheckSession"
 import { useNavigate } from 'react-router';
 import { Button } from 'react-bootstrap';
-
+import { ErrorProvider, useErrorContext } from 'Components/Context/ErrorContext';
 export function GroupCard({ group }) {
 
     const userData = useCheckSession()
     const navigate = useNavigate()
+    const { setError } = useErrorContext()
 
     const joinGroup = async (event) => {
         const chatId = event.currentTarget.id
         const userId = userData.data.id
-
-        let response = await restful("POST", `http://localhost:3001/api/chat/addUserToChat`, { userId, chatId })
+        let response
+        try{
+            response = await restful("POST", `http://localhost:3001/api/chat/addUserToChat`, { userId, chatId })
+        }catch(err){
+            console.log(err)
+            setError("Ha ocurrido un problema interno, lo sentimos.")
+        }
         navigate("/chat/" + response.data.chat._id)
     }
 

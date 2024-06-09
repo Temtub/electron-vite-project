@@ -33,14 +33,13 @@ body {
   margin-right: 10px;
   margin-left: 5px;
 
-  background-color: #D93025;
+  background-color: #d93025;
   color: #242424;
 
   padding-left: 4px;
   border-radius: 15px;
   width: 15px;
   height: 15px;
-
 }
 
 /* -------- ALERT ---------  */
@@ -51,7 +50,7 @@ body {
   overflow: visible;
 }
 
-.flyingMesage{
+.flyingMesage {
   background-color: #262627;
   border: 1px solid white;
   padding: 10px;
@@ -60,22 +59,51 @@ body {
   bottom: 10px;
   right: 10px;
   padding: 20px 25px 15px 10px;
-
 }
 
-.flyingMesage__text{
+.flyingMessage {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+
+  border: 1px solid white;
+
+  min-width: 120px;
+  min-height: 80px;
+  border-radius: 3px;
+
+  padding: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #242424;
 }
+
+.flyingMessage .close-btn {
+  background: none;
+  border: none;
+  font-size: 1.2em;
+  cursor: pointer;
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  transform: translateY(-50%);
+}
+
 /* ------ ESPECIAL COLORS ----- */
 .redError {
-  color: #D93025;
+  color: #d93025;
 }
-.neutral{
+.neutral {
   color: white;
 }
 .colorBlack {
   color: black;
 }
-
+.d-none {
+  display: none;
+}
 @media (min-width: 767.98px) {
   .alert {
     width: 80% !important;

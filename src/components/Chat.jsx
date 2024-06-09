@@ -5,6 +5,7 @@ import { getUserDataByToken } from '../services/getUserDataByToken';
 import { restful } from "/restApi/index.js"
 import { Container, Row, Col, Button } from 'react-bootstrap';
 import { useErrorContext } from './Context/ErrorContext';
+// import { ipcMain } from 'electron';
 // import { useXmpp } from './Context/XmppContext';
 
 function Chat() {
@@ -22,7 +23,7 @@ function Chat() {
   const [addedFriend, setAddedFriend] = useState("")
   const lastWriter = useRef(null);
   const { setError } = useErrorContext();
-  // const  {sendMessage, messages} = useXmpp()
+  const [newMessage, setNewMessage] = useState({})
 
   /**
    * Function to change who is the writer
@@ -48,7 +49,6 @@ function Chat() {
       setAddedFriend("")
       try {
         const userdata = await getUserDataByToken(userToken);
-        console.log(userdata)
         if (!userdata.status) {
           console.log("Reenviado");
           return navigate('/Se ha cerrado sesión automaticamente');
@@ -59,14 +59,15 @@ function Chat() {
         // console.log(userdata.data.data.friends)
         setUserFriends(userdata.data.data.friends);
 
-        const chatResponse = await restful("GET", `http://localhost:3001/api/chat/getChat/${idChatParam}`);
-        setChatData(chatResponse);
-        setChatHistory(chatResponse.data.messages);
+        const chatResponse = await getChatHistoryData()
 
         const friendId = chatResponse.data.users.find(id => id !== userId);
         const friendResponse = await restful("GET", `http://localhost:3001/api/user/${friendId}`);
+
+        console.log("Respuesta de friend response en chat ", friendResponse)
         setFriendName(friendResponse.name);
         setFriendId(friendResponse._id)
+
       } catch (error) {
         console.error("Error initializing chat:", error);
       }
@@ -75,6 +76,13 @@ function Chat() {
     initializeChat();
   }, [idChatParam, navigate, userToken]);
 
+  const getChatHistoryData = async () => {
+    const chatResponse = await restful("GET", `http://localhost:3001/api/chat/getChat/${idChatParam}`);
+    setChatData(chatResponse);
+    setChatHistory(chatResponse.data.messages);
+
+    return chatResponse
+  }
   useEffect(() => {
     scrollToBottom();
   }, [chatHistory]);
@@ -87,6 +95,13 @@ function Chat() {
   const handleInputChange = (event) => {
     setInputText(event.target.value);
   };
+
+  const getUserById = async (id) => {
+    console.log(id)
+    const user = await restful("GET", `http://localhost:3001/api/user/${id}`)
+    console.log("Respuesta de get user by id en chat", user)
+    return [id, user.name]
+  }
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -101,22 +116,36 @@ function Chat() {
 
       try {
         const response = await restful("POST", "http://localhost:3001/api/chat/newMessage", data);
-        console.log(response)
+
+        let usersMap = new Array([[]]);
+        // Get the promises of the name of the users of the chat
+        const userPromises = chatData.data.users.map(user => getUserById(user));
+
+        // Get the data from the promises
+        const users = await Promise.all(userPromises);
+        console.log(users)
+
+        users.forEach((userArray) => {
+          usersMap.push(userArray);
+        });
+
         const newMessage = {
           _id: response._id,
           sender: userIdState,
           content: inputText,
           time: instantMoment,
+          users: users
         };
 
-        // // Send the message thru ejabberd
-        // response.users.map(user=>{sendMessage(`${recipient}@localhost`, jsonContent)})
-
+        console.log(await window.ipcRenderer.sendMessageToOneUser(newMessage))
 
         setChatHistory(prevChatHistory => [...prevChatHistory, newMessage]);
         setInputText('');
       } catch (error) {
         console.error("Error sending message:", error);
+
+        setError("Ha ocurrido un problema mandando el mensaje")
+
       }
     }
   };
@@ -125,12 +154,27 @@ function Chat() {
     navigate("/chat");
   };
 
-  // console.log(userFriends)
+  useEffect(() => {
+    window.electron.receiveXMPPMessage((event, message) => {
+      setNewMessage(JSON.parse(message));
+    });
+  }, []);
 
+  useEffect(() => {
+    const addNewMessage = async () => {
+
+      await getChatHistoryData()
+
+    };
+
+    addNewMessage();
+  }, [newMessage]);
+
+  console.log(chatData)
   return (
     <div className='chat'>
       <div className='d-flex flex-row justify-content-between'>
-        <div className='d-flex flex-row'>
+        <div className='d-flex flex-row p-1' >
           <Button className="mb-2" onClick={handleBackToChats}>
             Volver a Chats
           </Button>
@@ -144,7 +188,7 @@ function Chat() {
         </div>
 
         {
-          userFriends && !userFriends.includes(friendId) && <button onClick={addFriend}><i className="fa-solid fa-user-plus"></i></button>
+          userFriends && chatData.data && chatData.data.users.length == 2 && !userFriends.includes(friendId) && <button onClick={addFriend}><i className="fa-solid fa-user-plus"></i></button>
         }
       </div>
 

@@ -7,6 +7,7 @@ import { restful } from "/restApi/index.js"
 import { FriendCheck } from './FriendCheck';
 
 export function CreateGroup() {
+    const checkSession = useCheckSession()
     const [groupName, setGroupName] = useState('');
     const [image, setImage] = useState(null);
     const [friends, setFriends] = useState([]);
@@ -37,9 +38,9 @@ export function CreateGroup() {
         event.preventDefault();
 
         if (!groupName || !image) {
-            setMsg('Por favor, rellena todos los campos.');
+            setError('Por favor, rellena todos los campos.');
         } else if (selectedFriends.length < 2) {
-            setMsg('Crea un grupo con al menos tres amigos');
+            setError('Crea un grupo con al menos tres amigos');
         } else {
             setIsSubmitting(true);
             const users = [...selectedFriends, userData._id];
@@ -59,7 +60,7 @@ export function CreateGroup() {
                     navigate("/chat/" + response._id);
                 }
             } catch (error) {
-                setError('Error al crear el grupo. Inténtalo de nuevo más tarde.');
+                setError('Error al crear el grupo. Pruebe con una imágen menos pesada.');
             } finally {
                 setIsSubmitting(false);
             }
@@ -77,6 +78,7 @@ export function CreateGroup() {
         if (file) {
             reader.readAsDataURL(file);
         }
+        console.log(file)
     };
 
     /**
@@ -94,7 +96,7 @@ export function CreateGroup() {
     };
 
     return (
-        <Container className="loginCard d-flex flex-column flex-md-row">
+        <Container className="loginCard d-flex flex-column flex-md-row createGroup">
             <Row className="w-100 w-md-50 justify-content-md-start align-items-start loginSide">
                 <Col>
                     <h1>Crea un grupo</h1>

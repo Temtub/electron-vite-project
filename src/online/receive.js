@@ -29,5 +29,5 @@ xmpp.on("close", () => {
 send()
 
 function send() {
-    xmpp.send("juanjo@ip-172-31-18-153.eu-north-1.compute.internal", `Maricon`);
+    xmpp.send("juanjo@ip-172-31-18-153.eu-north-1.compute.internal", `Holi`);
 }

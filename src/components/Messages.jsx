@@ -19,7 +19,7 @@ function Messages() {
   const [newChat, setNewChat] = useState([])
   const [showChatList, setShowChatList] = useState(true);
   const [showChat, setShowChat] = useState(true);
-  const { error } = useErrorContext();
+  const { error, setError } = useErrorContext();
 
   const navigate = useNavigate();
 
@@ -56,19 +56,20 @@ function Messages() {
       const response = await getNewChat(userData._id);
       setLoading(false);
       if (typeof response._id == 'undefined') {
+        setError(response.msg)
         return
       }
       navigate(`/chat/${response._id}`);
     }
   };
 
-
+  console.log(error)
   return (
     <Container fluid className='messages'>
       <Row className={`chat-sidebar ${showChatList ? 'd-block' : 'd-none'}`}>
         <Col className="ps-1 d-flex flex-column align-items-start">
-        {/* "navbar" of the side part */}
-          <div className='ps-2'>
+          {/* "navbar" of the side part */}
+          <div className='ps-2 mt-3'>
 
             <h2>Chats</h2>
             <Button
@@ -85,7 +86,7 @@ function Messages() {
         </Col>
       </Row>
 
-      <Row className={`chat__container ${showChat ? 'd-block' : 'd-none'}`}>
+      <Row className={`chat__container`}>
         <Col>
 
           <Outlet />

@@ -13,7 +13,7 @@ export function Preferences() {
     const [error, setError] = useState("");
     const [imagenPerfil, setImagenPerfil] = useState(null);
     const [gustos, setGustos] = useState([]);
-    const [isSubmitting, setIsSubmitting] = useState(false); 
+    const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
 
     const intereses = [
@@ -30,16 +30,16 @@ export function Preferences() {
     ];
 
     const ciudadesEspana = [
-        "A Coruña", "Albacete", "Alcalá de Henares", "Alcobendas", "Alcorcón", "Algeciras", "Alicante", 
-        "Almería", "Avilés", "Badajoz", "Badalona", "Barakaldo", "Barcelona", "Bilbao", "Burgos", 
-        "Cáceres", "Cádiz", "Cartagena", "Castellón de la Plana", "Ceuta", "Córdoba", "Dos Hermanas", 
-        "Elche", "Gandía", "Getafe", "Gijón", "Girona", "Granada", "Guadalajara", "Hospitalet de Llobregat", 
-        "Huelva", "Jaén", "Jerez de la Frontera", "Las Palmas de Gran Canaria", "Las Rozas de Madrid", 
-        "Lleida", "Logroño", "Lugo", "Madrid", "Marbella", "Mataró", "Melilla", "Mérida", "Móstoles", 
-        "Murcia", "Oviedo", "Palencia", "Palma", "Pamplona", "Parla", "Pontevedra", "Pozuelo de Alarcón", 
-        "Reus", "Sabadell", "Salamanca", "San Cristóbal de La Laguna", "San Fernando", "San Sebastián", 
-        "Santa Coloma de Gramenet", "Santa Cruz de Tenerife", "Santander", "Santiago de Compostela", 
-        "Segovia", "Sevilla", "Tarragona", "Telde", "Terrassa", "Toledo", "Torremolinos", "Torrejón de Ardoz", 
+        "A Coruña", "Albacete", "Alcalá de Henares", "Alcobendas", "Alcorcón", "Algeciras", "Alicante",
+        "Almería", "Avilés", "Badajoz", "Badalona", "Barakaldo", "Barcelona", "Bilbao", "Burgos",
+        "Cáceres", "Cádiz", "Cartagena", "Castellón de la Plana", "Ceuta", "Córdoba", "Dos Hermanas",
+        "Elche", "Gandía", "Getafe", "Gijón", "Girona", "Granada", "Guadalajara", "Hospitalet de Llobregat",
+        "Huelva", "Jaén", "Jerez de la Frontera", "Las Palmas de Gran Canaria", "Las Rozas de Madrid",
+        "Lleida", "Logroño", "Lugo", "Madrid", "Marbella", "Mataró", "Melilla", "Mérida", "Móstoles",
+        "Murcia", "Oviedo", "Palencia", "Palma", "Pamplona", "Parla", "Pontevedra", "Pozuelo de Alarcón",
+        "Reus", "Sabadell", "Salamanca", "San Cristóbal de La Laguna", "San Fernando", "San Sebastián",
+        "Santa Coloma de Gramenet", "Santa Cruz de Tenerife", "Santander", "Santiago de Compostela",
+        "Segovia", "Sevilla", "Tarragona", "Telde", "Terrassa", "Toledo", "Torremolinos", "Torrejón de Ardoz",
         "Valencia", "Valladolid", "Vélez-Málaga", "Vigo", "Vitoria-Gasteiz", "Zaragoza"
     ];
 
@@ -66,7 +66,7 @@ export function Preferences() {
             return;
         }
 
-        setIsSubmitting(true); 
+        setIsSubmitting(true);
 
         const data = {
             birth_date: fechaNacimiento,
@@ -79,6 +79,7 @@ export function Preferences() {
 
         try {
             const response = await restful("POST", `http://localhost:3001/api/user/addDataToUser`, data);
+            console.log(response)
             if (!response.status) {
                 setError(response.msg);
             } else {
@@ -90,13 +91,14 @@ export function Preferences() {
             setIsSubmitting(false);
         }
 
-        setError("");
+        setError("Ha ocurrido un error interno, lo sentimos mucho.");
     };
 
     const handleImageChange = (e) => {
         setImagenPerfil(e.target.files[0]);
     };
 
+    console.log(error)
     return (
         <Container className="loginCard d-flex flex-column flex-md-row">
             <Row className="formText w-100 m-1 justify-content-md-center align-items-start">
@@ -104,18 +106,24 @@ export function Preferences() {
                     <h1>Háblanos de ti...</h1>
                     <p>Rellena este formulario para terminar de conocerte y saber con quien juntarte...</p>
                 </Col>
-                <Form.Group className="formGroup" controlId="formBasicGustos">
+                <Form.Group className="formGroup p-0 pe-4" controlId="formBasicGustos">
                     <Form.Label className="formLabel">Gustos:</Form.Label>
                     <div className="formCheckGroup">
-                        {intereses.map((interes, index) => (
-                            <Form.Check
-                                key={index}
-                                type="checkbox"
-                                label={interes}
-                                value={interes}
-                                onChange={handleGustosChange}
-                            />
-                        ))}
+                        {intereses.map((interes, index) => {
+                            const checkboxId = `checkbox-${index}`;
+                            return (
+                                <div key={index}>
+                                    <input
+                                        className="me-3"
+                                        type="checkbox"
+                                        id={checkboxId}
+                                        value={interes}
+                                        onChange={handleGustosChange}
+                                    />
+                                    <label htmlFor={checkboxId}>{interes}</label>
+                                </div>
+                            );
+                        })}
                     </div>
                 </Form.Group>
             </Row>
@@ -178,7 +186,7 @@ export function Preferences() {
                                 type="submit"
                                 className="btn btnLogin mb-2"
                                 id="send"
-                                disabled={isSubmitting} 
+                                disabled={isSubmitting}
                             >
                                 Continuar
                             </Button>

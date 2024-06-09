@@ -6,7 +6,6 @@ function Message({ text, actualUser, sender, author, changeLastWriter, lastWrite
   const [shouldDisplayWriter, setShouldDisplayWriter] = useState(true);
 
   if(sender == actualUser){
-    console.log("if")
     return (
       <div className="message messageByUser">
         {text}
@@ -22,10 +21,10 @@ function Message({ text, actualUser, sender, author, changeLastWriter, lastWrite
   }
 
   useEffect(() => {
-    console.log("useEffect")
     if (lastWriter.current !== sender && sender !== actualUser) {
       const getFriendName = async () => {
         let response = await restful("GET", `http://localhost:3001/api/user/${sender}`);
+        // console.log("Respuesta de conseguir friend name", response)
         setFriendName(response.name);
       };
       getFriendName();

@@ -31,7 +31,7 @@ function ChatBox({ id, chatName, friends = [], users, icon }) {
     }, [userData]);
 
     return (
-        <Link to={"/chat/" + id} className="chatBox d-flex flex-row align-items-center">
+        <Link to={"/chat/" + id} className="chatBox d-flex flex-row align-items-center w-100">
             {icon ? (
                 <img className="chatBox__Img" src={icon} alt="Icono de grupo" />
             ) : (
