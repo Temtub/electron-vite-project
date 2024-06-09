@@ -9,7 +9,7 @@ export function FriendCheck({friendId, handleFriendChange}) {
     useEffect(()=>{
         const getFriendName = async (friendId) =>{
 
-            const response = await restful("GET", `http://localhost:3001/api/user/${friendId}`)
+            const response = await restful("GET", `/api/user/${friendId}`)
             console.log(response)
             setFriendName(response.name)
         }

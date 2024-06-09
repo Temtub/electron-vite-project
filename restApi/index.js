@@ -19,7 +19,7 @@ export const restful = async (method, endpoint, data, headers = {}) => {
         body: method !== 'GET' ? JSON.stringify(data) : undefined 
     };
     // Return the data
-    return fetch(endpoint, options)
+    return fetch(`http://13.53.216.208:3001${endpoint}`, options)
         .then(response => {
             return response.json();
         })

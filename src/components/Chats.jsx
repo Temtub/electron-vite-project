@@ -16,7 +16,7 @@ function Chats({ data }) {
         const fetchData = async () => {
             if (data && data.length > 0) {
                 try {
-                    const response = await restful('POST', 'http://localhost:3001/api/chat/chats', { chats: data });
+                    const response = await restful('POST', '/api/chat/chats', { chats: data });
 
                     if (response.hasOwnProperty('status') && response.status === false) {
                         setError(response.msg);

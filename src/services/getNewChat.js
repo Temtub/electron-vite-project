@@ -6,7 +6,7 @@ export const getNewChat = (user) =>{
         user : user
     }
 
-    let response = restful("POST", "http://localhost:3001/api/user/newChat", data)
+    let response = restful("POST", "/api/user/newChat", data)
 
     return response
 }

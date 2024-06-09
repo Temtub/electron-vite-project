@@ -22,7 +22,7 @@ export function ViewGroups() {
         const get20groups = async (userId) => {
             let response
             try {
-                response = await restful("POST", `http://localhost:3001/api/chat/get20groups/`, {userId})
+                response = await restful("POST", `/api/chat/get20groups/`, {userId})
                 
             } catch (error) {
                 setError("Ha ocurrido un error interno, lo sentimos.")

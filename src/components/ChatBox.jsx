@@ -19,10 +19,10 @@ function ChatBox({ id, chatName, friends = [], users, icon }) {
             if (users.length > 2) {
                 setName(chatName);
             } else if (userData.data.id === users[0]) {
-                response = await restful("GET", `http://localhost:3001/api/user/${users[1]}`);
+                response = await restful("GET", `/api/user/${users[1]}`);
                 setName(response.name);
             } else {
-                response = await restful("GET", `http://localhost:3001/api/user/${users[0]}`);
+                response = await restful("GET", `/api/user/${users[0]}`);
                 setName(response.name);
             }
         }

@@ -23,7 +23,7 @@ export function CreateGroup() {
         const chargeMessages = async () => {
             if (token) {
                 try {
-                    let response = await restful("GET", `http://localhost:3001/api/user/${token.data.id}`);
+                    let response = await restful("GET", `/api/user/${token.data.id}`);
                     setUserData(response);
                 } catch (error) {
                     console.error('Failed to fetch messages:', error);
@@ -52,7 +52,7 @@ export function CreateGroup() {
 
             try {
                 //  SEend to bd
-                let response = await restful("POST", "http://localhost:3001/api/chat/createGroup", data);
+                let response = await restful("POST", "/api/chat/createGroup", data);
                 console.log(response);
                 if (typeof response.status !== 'undefined' && !response.status) {
                     setError(response.msg);

@@ -23,7 +23,7 @@ function Message({ text, actualUser, sender, author, changeLastWriter, lastWrite
   useEffect(() => {
     if (lastWriter.current !== sender && sender !== actualUser) {
       const getFriendName = async () => {
-        let response = await restful("GET", `http://localhost:3001/api/user/${sender}`);
+        let response = await restful("GET", `/api/user/${sender}`);
         // console.log("Respuesta de conseguir friend name", response)
         setFriendName(response.name);
       };

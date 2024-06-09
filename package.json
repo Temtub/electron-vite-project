@@ -1,16 +1,35 @@
 {
-  "name": "electron-vite-project",
+  "name": "chatexpress",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
+  "description": "Programa de fin de grado",
   "scripts": {
     "dev": "vite",
     "test": "electron --trace-deprecation ...",
     "build": "tsc && vite build && electron-builder",
+    "make": "electron-forge make",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "electron-forge start",
+    "package": "electron-forge package"
   },
+  "config": {
+    "forge": {
+      "makers": [
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "win32"
+          ]
+        }
+      ],
+      "publishers": []
+    }
+  },
+  "author": "RodrigoRomero",
   "dependencies": {
     "bootstrap": "^5.3.3",
+    "electron-squirrel-startup": "^1.0.1",
     "jwt-decode": "^4.0.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.10.2",
@@ -25,13 +44,20 @@
     "vite-tsconfig-paths": "^4.3.2"
   },
   "devDependencies": {
+    "@electron-forge/cli": "^7.4.0",
+    "@electron-forge/maker-deb": "^7.4.0",
+    "@electron-forge/maker-rpm": "^7.4.0",
+    "@electron-forge/maker-squirrel": "^7.4.0",
+    "@electron-forge/maker-zip": "^7.4.0",
+    "@electron-forge/plugin-auto-unpack-natives": "^7.4.0",
+    "@electron-forge/plugin-fuses": "^7.4.0",
+    "@electron/fuses": "^1.8.0",
     "@types/react": "^18.2.64",
     "@types/react-dom": "^18.2.21",
     "@typescript-eslint/eslint-plugin": "^7.1.1",
     "@typescript-eslint/parser": "^7.1.1",
     "@vitejs/plugin-react": "^4.2.1",
     "electron": "^29.1.4",
-    "electron-builder": "^24.13.3",
     "eslint": "^8.57.0",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-plugin-react-refresh": "^0.4.5",

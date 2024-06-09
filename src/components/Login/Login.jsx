@@ -36,7 +36,8 @@ function Login() {
         }
         // Check that the user exists
         try {
-            response = await restful("POST", "http://localhost:3001/api/login", data)
+            response = await restful("POST", "/api/login", data)
+            console.error("Login:", response)
         } catch (err) {
             setError("Ha ocurrido un error, pruebe más tarde.")
         }

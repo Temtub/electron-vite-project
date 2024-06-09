@@ -27,7 +27,7 @@ function Messages() {
     const chargeMessages = async () => {
       if (token) {
         try {
-          let response = await restful("GET", `http://localhost:3001/api/user/${token.data.id}`);
+          let response = await restful("GET", `/api/user/${token.data.id}`);
           setUserData(response);
         } catch (error) {
           console.error('Failed to fetch messages:', error);

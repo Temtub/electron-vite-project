@@ -18,7 +18,7 @@ export function GroupCard({ group }) {
         const userId = userData.data.id
         let response
         try{
-            response = await restful("POST", `http://localhost:3001/api/chat/addUserToChat`, { userId, chatId })
+            response = await restful("POST", `/api/chat/addUserToChat`, { userId, chatId })
         }catch(err){
             console.log(err)
             setError("Ha ocurrido un problema interno, lo sentimos.")

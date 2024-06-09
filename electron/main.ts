@@ -56,6 +56,7 @@ async function createWindow() {
     // win.loadFile('dist/index.html')
     win.loadFile(path.join(process.env.DIST, 'index.html'))
   }
+  console.log("directorio", __dirname)
   win.setTitle("Bienvenido de nuevo")
   setTimeout(() => {
     win.setTitle('ChatExpress');

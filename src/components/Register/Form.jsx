@@ -32,7 +32,7 @@ function Register() {
                 email: email
             };
             try {
-                let response = await restful("POST", "http://localhost:3001/api/register", data);
+                let response = await restful("POST", "/api/register", data);
                 console.log(response)
                 if (!response.status) {
                     

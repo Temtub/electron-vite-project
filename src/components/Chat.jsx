@@ -34,7 +34,7 @@ function Chat() {
   }
 
   const addFriend = async (event) => {
-    let response = await restful("POST", `http://localhost:3001/api/user/addFriendToUser`, { friendId, userId: userIdState })
+    let response = await restful("POST", `/api/user/addFriendToUser`, { friendId, userId: userIdState })
 
     if (response.status) {
       setError("Amigo agregado correctamente.")
@@ -62,7 +62,7 @@ function Chat() {
         const chatResponse = await getChatHistoryData()
 
         const friendId = chatResponse.data.users.find(id => id !== userId);
-        const friendResponse = await restful("GET", `http://localhost:3001/api/user/${friendId}`);
+        const friendResponse = await restful("GET", `/api/user/${friendId}`);
 
         console.log("Respuesta de friend response en chat ", friendResponse)
         setFriendName(friendResponse.name);
@@ -77,7 +77,7 @@ function Chat() {
   }, [idChatParam, navigate, userToken]);
 
   const getChatHistoryData = async () => {
-    const chatResponse = await restful("GET", `http://localhost:3001/api/chat/getChat/${idChatParam}`);
+    const chatResponse = await restful("GET", `/api/chat/getChat/${idChatParam}`);
     setChatData(chatResponse);
     setChatHistory(chatResponse.data.messages);
 
@@ -98,7 +98,7 @@ function Chat() {
 
   const getUserById = async (id) => {
     console.log(id)
-    const user = await restful("GET", `http://localhost:3001/api/user/${id}`)
+    const user = await restful("GET", `/api/user/${id}`)
     console.log("Respuesta de get user by id en chat", user)
     return [id, user.name]
   }
@@ -115,7 +115,7 @@ function Chat() {
       };
 
       try {
-        const response = await restful("POST", "http://localhost:3001/api/chat/newMessage", data);
+        const response = await restful("POST", "/api/chat/newMessage", data);
 
         let usersMap = new Array([[]]);
         // Get the promises of the name of the users of the chat

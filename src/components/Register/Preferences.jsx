@@ -78,7 +78,7 @@ export function Preferences() {
         };
 
         try {
-            const response = await restful("POST", `http://localhost:3001/api/user/addDataToUser`, data);
+            const response = await restful("POST", `/api/user/addDataToUser`, data);
             console.log(response)
             if (!response.status) {
                 setError(response.msg);
