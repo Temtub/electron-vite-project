@@ -157,9 +157,10 @@ input[type="file"]::file-selector-button {
 }
 
 /* ------------ REGISTER --------- */
-@media (min-width: 767.98px) {
+@media (max-width: 990px) {
     .formRegister {
-        width: 80% !important;
+        width: 85% !important;
+        /* width: 500px !important; */
     }
 
     .formText {

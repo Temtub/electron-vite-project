@@ -125,6 +125,7 @@ function sendMessageToOneUser(message: Message) {
       }
     });
   }
+  
 
   if (message.users[0][0] == message.sender) {
     name = message.users[1][1]

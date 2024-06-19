@@ -3,6 +3,7 @@ import { Link, useNavigate, useParams } from "react-router-dom"
 import { Container, Row, Col, Form, Button, ButtonGroup, Alert } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { restful } from "/restApi/index"
+import React from 'react';
 
 // COmponents
 import { ShowMessage } from "Components/specialMessages/ShowMessage";
@@ -34,6 +35,7 @@ function Login() {
             user: user,
             pass: pass
         }
+        console.log(data)
         // Check that the user exists
         try {
             response = await restful("POST", "/api/login", data)
@@ -95,7 +97,7 @@ function Login() {
 
                         {error && <ShowMessage msg={error}></ShowMessage>}
 
-                        <div className="buttonGroup d-flex flex-column-reverse flex-md-row justify-content-between">
+                        <div className="buttonGroup d-flex flex-column-reverse flex-xxl-row justify-content-between">
                             <Link to="/register" className="btn mb-2">
                                 Registrarse
                             </Link>

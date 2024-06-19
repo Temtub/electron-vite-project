@@ -16,6 +16,7 @@ function Register() {
     const [error, setError] = useState('');
     const [isSubmitting, setIsSubmitting] = useState(false);
     const navigate = useNavigate();
+    const PASSWORDEXPRESSION = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -24,8 +25,10 @@ function Register() {
             setError('Por favor, rellena todos los campos.');
         } else if (password !== confirmPassword) {
             setError('Las passwords no coinciden.');
+        } else if (!PASSWORDEXPRESSION.test(password)) {
+            setError('La contraseña ha de tener una mayúscula, una minúscula, un número, un símbolo como mínimo y una longitud de 8 carácteres como mínimo.');
         } else {
-            setIsSubmitting(true); 
+            setIsSubmitting(true);
             const data = {
                 user: nombre,
                 pass: password,
@@ -35,7 +38,7 @@ function Register() {
                 let response = await restful("POST", "/api/register", data);
                 console.log(response)
                 if (!response.status) {
-                    
+
                     setError(response.msg);
                 } else {
                     navigate("/preferences/" + response.data._id);
@@ -49,18 +52,18 @@ function Register() {
     };
 
     return (
-        <Container className="loginCard d-flex flex-column flex-md-row">
-            <Row className="formText w-75 justify-content-md-center align-items-start">
+        <Container className="loginCard d-flex flex-column flex-lg-row">
+            <Row className="formText justify-content-md-center align-items-start">
                 <Col>
                     <h1>Regístrate</h1>
                 </Col>
             </Row>
 
-            <Row className="formRegister w-100 justify-content-md-center">
+            <Row className="formRegister  m-3 justify-content-md-center">
                 <Col xs={12} md={12}>
                     <Form onSubmit={handleSubmit}>
                         <Form.Group className="formGroup" controlId="formBasicName">
-                            <Form.Label className="formLabel">Nombre:</Form.Label>
+                            <Form.Label className="formLabel">Nickname:</Form.Label>
 
                             <Form.Control
                                 className="formInput"
@@ -82,8 +85,8 @@ function Register() {
                             />
                         </Form.Group>
 
-                        <Row className="d-flex flex-column flex-md-row">
-                            <Col xs={12} md={6}>
+                        <Row className="d-flex flex-column flex-xxl-row">
+                            <Col xs={12} xxl={6}>
                                 <Form.Group className="formGroup" controlId="formBasicPassword">
                                     <Form.Label className="formLabel">Contraseña:</Form.Label>
                                     <Form.Control
@@ -96,7 +99,7 @@ function Register() {
                                 </Form.Group>
                             </Col>
 
-                            <Col xs={12} md={6}>
+                            <Col xs={12} xxl={6}>
                                 <Form.Group className="formGroup" controlId="formBasicConfirmPassword">
                                     <Form.Label className="formLabel">Repite la contraseña:</Form.Label>
                                     <Form.Control
@@ -111,7 +114,7 @@ function Register() {
                         </Row>
                         {error && <ShowMessage msg={error}></ShowMessage>}
 
-                        <div className="buttonGroup d-flex flex-column-reverse flex-md-row justify-content-between">
+                        <div className="buttonGroup d-flex flex-column-reverse flex-xxl-row justify-content-between">
                             <Link to="/" className="btn mb-2 ">
                                 Iniciar sesión
                             </Link>
