@@ -7,7 +7,6 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 //Import the css
 import './styles/login.css'
 import './styles/index.css'
-import './styles/chats.css'
 import './styles/navbar.css'
 import './styles/groups.css'
 
@@ -21,7 +20,7 @@ import Layout from 'Components/Layouts/Layout';
 import Navbar from 'Components/Layouts/Navbar';
 import { Preferences } from 'Components/Register/Preferences';
 
-import styled, { createGlobalStyle } from 'styled-components';
+// import styled, { createGlobalStyle } from 'styled-components';
 import { ThemeProvider } from './styles/ThemeContext';
 import { ViewGroups } from 'Components/Groups/ViewGroups';
 import { CreateGroup } from 'Components/Groups/CreateGroup';

@@ -82,16 +82,16 @@ function Messages() {
             </Button>
           </div>
           {/* List of the chats */}
-          {userData ? <Chats data={userData.chats} onChatClick={handleChatClick} /> : <ChargingChats />}
+          {userData ? <Chats data={userData.chats}/> : <ChargingChats />}
         </Col>
       </Row>
 
-      <Row className={`chat__container`}>
+      {/* <Row className={`chat__container`}>
         <Col>
 
-          <Outlet />
         </Col>
-      </Row>
+      </Row> */}
+          <Outlet />
 
       {error && <FlyingMessage msg={error} ></FlyingMessage>}
 

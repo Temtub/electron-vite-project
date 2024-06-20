@@ -7,6 +7,7 @@ import { Container, Row, Col, Button } from 'react-bootstrap';
 import { useErrorContext } from './Context/ErrorContext';
 // import { ipcMain } from 'electron';
 // import { useXmpp } from './Context/XmppContext';
+import '../styles/chats.css'
 
 function Chat() {
   const userToken = localStorage.getItem("token");
@@ -172,7 +173,7 @@ function Chat() {
 
   console.log(chatData)
   return (
-    <div className='chat'>
+    <div className='chat m-md-3'>
       <div className='d-flex flex-row justify-content-between'>
         <div className='d-flex flex-row p-1' >
           <Button className="mb-2" onClick={handleBackToChats}>
